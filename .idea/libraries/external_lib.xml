@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="external_lib">
+    <CLASSES />
+    <JAVADOC />
+    <NATIVE>
+      <root url="file://$PROJECT_DIR$/external_lib" />
+    </NATIVE>
+    <SOURCES />
+  </library>
+</component>
