@@ -4,6 +4,8 @@
       <root url="jar://$PROJECT_DIR$/lib/opencv-412.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/opencv-412.jar!/" />
+    </SOURCES>
   </library>
 </component>

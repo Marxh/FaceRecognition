@@ -17,11 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-class GoogleEmotionAnalyst {
+class GoogleEmotionAPI {
     public static void main(String[] args) throws Exception {
         String filePath = "img/barack-obama-12782369-1-402.jpg";
-        GoogleEmotionAnalyst googleEmotionAnalyst = new GoogleEmotionAnalyst();
-        googleEmotionAnalyst.detectFaces(filePath);
+        GoogleEmotionAPI googleEmotionAPI = new GoogleEmotionAPI();
+        googleEmotionAPI.detectFaces(filePath);
     }
 
     public void detectFaces(String filePath) throws Exception {
