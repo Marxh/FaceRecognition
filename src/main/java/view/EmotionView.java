@@ -1,3 +1,6 @@
+package view;
+
+import controller.OpenCVController;
 import org.opencv.core.Core;
 
 import javafx.application.Application;
@@ -18,7 +21,7 @@ import javafx.fxml.FXMLLoader;
  * @since 1.0 (2014-01-10)
  * 
  */
-public class Main extends Application
+public class EmotionView extends Application
 {
 	@Override
 	public void start(Stage primaryStage)
@@ -30,7 +33,7 @@ public class Main extends Application
 			root.setStyle("-fx-background-color: whitesmoke;");
 			// create and style a scene
 			Scene scene = new Scene(root, 800, 600);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 			// create the stage with the given title and the previously created
 			// scene
 			primaryStage.setTitle("Face Detection and Tracking");
@@ -39,7 +42,7 @@ public class Main extends Application
 			primaryStage.show();
 			
 			// init the controller
-			FXController controller = loader.getController();
+			OpenCVController controller = loader.getController();
 			controller.init();
 		}
 		catch (Exception e)

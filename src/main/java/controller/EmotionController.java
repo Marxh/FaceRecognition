@@ -1,3 +1,5 @@
+package controller;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -39,7 +41,6 @@ import org.opencv.face.FaceRecognizer;
 
 
 
-
 /**
  * The controller associated with the only view of our application. The
  * application logic is implemented here. It handles the button for
@@ -51,7 +52,7 @@ import org.opencv.face.FaceRecognizer;
  * @since 1.0 (2014-01-10)
  * 		
  */
-public class FXController
+public class EmotionController
 {
 	// FXML buttons
 	@FXML
