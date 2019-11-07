@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="357.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+   <children>
+      <TextField fx:id="usernameField" layoutX="104.0" layoutY="200.0" prefHeight="30.0" prefWidth="176.0" promptText="Username">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </TextField>
+      <PasswordField fx:id="passwordField" layoutX="104.0" layoutY="238.0" prefHeight="30.0" prefWidth="176.0" promptText="Password" />
+      <Button fx:id="loginButton" layoutX="104.0" layoutY="273.0" mnemonicParsing="false" onAction="#doLogin" prefHeight="27.0" prefWidth="54.0" style="-fx-background-color: #6638F0;" text="Login" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font></Button>
+      <Button fx:id="exitButton" layoutX="225.0" layoutY="273.0" mnemonicParsing="false" onAction="#doExit" prefHeight="27.0" prefWidth="54.0" style="-fx-background-color: #6638F0;" text="Exit" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font></Button>
+      <ImageView fx:id="cmuImage" fitHeight="174.0" fitWidth="183.0" layoutX="93.0" layoutY="11.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/cmu.png" />
+         </image>
+      </ImageView>
+      <Hyperlink fx:id="aboutUs" layoutX="14.0" layoutY="338.0" onAction="#onAboutUs" text="About Us" textFill="#060303" underline="true">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font></Hyperlink>
+      <Hyperlink fx:id="changePassword" layoutX="97.0" layoutY="338.0" onAction="#onChangePassword" text="Change Password" textFill="#060303" underline="true">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font></Hyperlink>
+      <Hyperlink fx:id="forgetPassword" layoutX="233.0" layoutY="338.0" onAction="#onForgetPassword" text="Forget Password?" textFill="#060303" underline="true">
+         <font>
+            <Font name="Arial Bold" size="13.0" />
+         </font></Hyperlink>
+      <Label layoutX="32.0" layoutY="202.0" prefHeight="27.0" prefWidth="61.0" text="User name" />
+      <Label layoutX="32.0" layoutY="240.0" prefHeight="27.0" prefWidth="61.0" text="Password" />
+      <ImageView disable="true" fitHeight="370.0" fitWidth="357.0" opacity="0.1" pickOnBounds="true">
+         <image>
+            <Image url="@../images/cmu_welcome.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>
