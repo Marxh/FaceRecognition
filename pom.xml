@@ -26,6 +26,12 @@
             <artifactId>google-cloud-storage</artifactId>
             <version>1.83.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.16</version>
+        </dependency>
         <!-- [END vision_java_dependencies] -->
 
         <!-- Test dependencies -->
