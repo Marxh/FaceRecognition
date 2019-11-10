@@ -10,9 +10,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="454.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomePageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="454.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="legacy.HomePageController">
    <top>
-      <HBox fx:id="topMenu" prefHeight="26.0" prefWidth="454.0" BorderPane.alignment="CENTER">
+      <HBox fx:id="topMenu" prefHeight="16.0" prefWidth="454.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="homepage" mnemonicParsing="false" onAction="#goHome" prefHeight="39.0" prefWidth="86.0" style="-fx-background-radius: 0;" text="Home">
                <font>
@@ -21,19 +21,19 @@
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/home.png" />
+                        <Image url="@../images/home.png"/>
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <Button fx:id="logButton" mnemonicParsing="false" onAction="#goLog" prefHeight="34.0" prefWidth="84.0" style="-fx-background-radius: 0;" text="Log">
                <font>
-                  <Font name="Arial Bold" size="12.0" />
+                  <Font name="Arial Bold" size="12.0"/>
                </font>
                <graphic>
                   <ImageView fitHeight="15.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/log.png" />
+                        <Image url="@../images/log.png"/>
                      </image>
                   </ImageView>
                </graphic>

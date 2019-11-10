@@ -1,8 +1,10 @@
 package controller;
 
+import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +12,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Hyperlink;
+import javafx.stage.Stage;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -38,8 +44,9 @@ import javafx.scene.image.ImageView;
 import org.opencv.face.BasicFaceRecognizer;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.face.FaceRecognizer;
-
-
+import view.FilterPage;
+import view.HomePage;
+import view.SettingPage;
 
 
 /**
@@ -72,8 +79,19 @@ public class OpenCVController
 	private TextField newUserName;
 	@FXML
 	private Button newUserNameSubmit;
-	
-	
+	@FXML
+	public Button homepage;
+	@FXML
+	public Button logButton;
+	@FXML
+	public Button reportButton;
+	@FXML
+	public Hyperlink urlOpenCV;
+	@FXML
+	public Hyperlink urlCMU;
+	@FXML
+	public Hyperlink urlHelp;
+
 	
 	// a timer for acquiring the video stream
 	private ScheduledExecutorService timer;
@@ -99,6 +117,78 @@ public class OpenCVController
 	
 	// Random number of a training set
 	public int random = (int)(Math.random() * 20 + 3);
+
+	public void goLog(ActionEvent actionEvent) {
+	}
+
+	public void goReport(ActionEvent actionEvent) {
+		FilterPage filterPage = new FilterPage();
+		filterPage.start(new Stage());
+	}
+
+	public void goSetting(ActionEvent actionEvent) {
+		SettingPage settingPage = new SettingPage();
+		settingPage.start(new Stage());
+	}
+
+	public void doExit(ActionEvent actionEvent) {
+		Platform.exit();
+	}
+
+	@FXML
+	public void openUrlOpenCV(ActionEvent actionEvent) {
+		if (Desktop.isDesktopSupported()) {
+			try {
+				URI uri = URI.create("https://opencv.org/about/");
+				Desktop dp = Desktop.getDesktop();
+				if (dp.isSupported(Desktop.Action.BROWSE)) {
+					dp.browse(uri);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@FXML
+	public void openUrlCMU(ActionEvent actionEvent) {
+		if (Desktop.isDesktopSupported()) {
+			try {
+				URI uri = URI.create("https://www.cmu.edu");
+				Desktop dp = Desktop.getDesktop();
+				if (dp.isSupported(Desktop.Action.BROWSE)) {
+					dp.browse(uri);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@FXML
+	public void openUrlHelp(ActionEvent actionEvent) {
+		if (Desktop.isDesktopSupported()) {
+			try {
+				URI uri = URI.create("https://docs.opencv.org/4.1.2/");
+				Desktop dp = Desktop.getDesktop();
+				if (dp.isSupported(Desktop.Action.BROWSE)) {
+					dp.browse(uri);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+
+	@FXML
+	public void goHome(ActionEvent actionEvent) {
+		HomePage home = new HomePage();
+		home.start(new Stage());
+
+		Stage stage = (Stage) homepage.getScene().getWindow();
+		stage.close();
+	}
 	
 	/**
 	 * Init the controller, at start time
@@ -110,8 +200,8 @@ public class OpenCVController
 		this.absoluteFaceSize = 0;
 		
 		// disable 'new user' functionality
-		this.newUserNameSubmit.setDisable(true);
-		this.newUserName.setDisable(true);
+		//this.newUserNameSubmit.setDisable(true);
+		//this.newUserName.setDisable(true);
 		// Takes some time thus use only when training set
 		// was updated 
 		trainModel();
@@ -137,7 +227,7 @@ public class OpenCVController
 			this.lbpClassifier.setDisable(true);
 			
 			// disable 'New user' checkbox
-			this.newUser.setDisable(true);
+			//this.newUser.setDisable(true);
 			
 			// start the video capture
 			this.capture.open(0);
@@ -180,7 +270,7 @@ public class OpenCVController
 			this.haarClassifier.setDisable(false);
 			this.lbpClassifier.setDisable(false);
 			// enable 'New user' checkbox
-			this.newUser.setDisable(false);
+			//this.newUser.setDisable(false);
 			
 			// stop the timer
 			try{
@@ -367,12 +457,6 @@ public class OpenCVController
 			
 			// check if 'New user' checkbox is selected
 			// if yes start collecting training data (50 images is enough)
-			if ((newUser.isSelected() && !newname.isEmpty())) {
-				if (index<20) {
-					Imgcodecs.imwrite("resources/trainingset/combined/" +
-					random + "-" + newname + "_" + (index++) + ".png", resizeImage);
-				}
-			}
 //			int prediction = faceRecognition(resizeImage);
 			double[] returnedResults = faceRecognition(resizeImage);
 			double prediction = returnedResults[0];
@@ -399,19 +483,6 @@ public class OpenCVController
             		1, 1.0, new Scalar(0, 255, 0, 2.0));
 		}
 	}
-
-	
-
-	@FXML
-	protected void newUserNameSubmitted() {
-		if ((newUserName.getText() != null && !newUserName.getText().isEmpty())) {
-			newname = newUserName.getText();
-			//collectTrainingData(name);
-			System.out.println("BUTTON HAS BEEN PRESSED");
-			newUserName.clear();
-		}
-	}
-	
 
 	/**
 	 * The action triggered by selecting the Haar Classifier checkbox. It loads
@@ -440,17 +511,7 @@ public class OpenCVController
 			
 		this.checkboxSelection("resources/lbpcascades/lbpcascade_frontalface.xml");
 	}
-	
-	@FXML
-	protected void newUserSelected(Event event) {
-		if (this.newUser.isSelected()){
-			this.newUserNameSubmit.setDisable(false);
-			this.newUserName.setDisable(false);
-		} else {
-			this.newUserNameSubmit.setDisable(true);
-			this.newUserName.setDisable(true);
-		}
-	}
+
 	
 	/**
 	 * Method for loading a classifier trained set from disk

@@ -1,4 +1,4 @@
-package controller;
+package legacy;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;

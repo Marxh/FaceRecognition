@@ -1,11 +1,12 @@
 package view;
 
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class HomePage {
+public class HomePage extends Application {
     Stage primaryStage;
 
     public void start(Stage primaryStage) {
@@ -13,7 +14,7 @@ public class HomePage {
         primaryStage.setResizable(false);
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/homePage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("/legacy/homePage.fxml"));
             BorderPane root = (BorderPane) loader.load();
             root.setStyle("-fx-background-color: whitesmoke;");
 
@@ -27,4 +28,9 @@ public class HomePage {
             e.printStackTrace();
         }
     }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
 }
