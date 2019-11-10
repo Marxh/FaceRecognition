@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="724.0" prefWidth="969.0" style="-fx-background-color: #9F182E;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AboutUsPageController">
+   <children>
+      <Label layoutX="22.0" layoutY="14.0" text="OVERVIEW" textFill="#d09898">
+         <font>
+            <Font name="Arial" size="9.0" />
+         </font>
+      </Label>
+      <Label layoutX="22.0" layoutY="33.0" text="Profile" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="24.0" />
+         </font>
+      </Label>
+      <Line endX="869.0" layoutX="100.0" layoutY="68.0" opacity="0.1" startX="-100.0" />
+      <Pane layoutY="69.0" prefHeight="655.0" prefWidth="969.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Hyperlink fx:id="yufan" layoutX="113.0" layoutY="584.0" onAction="#goYufan" prefHeight="35.0" prefWidth="126.0" text="Yufan YAN" textFill="#6638f0" underline="true" wrapText="true">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Hyperlink>
+            <Pane layoutX="531.0" layoutY="240.0" prefHeight="146.0" prefWidth="126.0" style="-fx-border-radius: 0.1em;">
+               <children>
+                  <Label layoutX="7.0" prefHeight="43.0" prefWidth="112.0" text="Program:">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="97.0" text="Reponsibility:">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="105.0" prefHeight="43.0" prefWidth="118.0" text="openCV" wrapText="true">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/opencv.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="29.0" prefHeight="59.0" prefWidth="118.0" text="Master of Information System Management (Global Track)" wrapText="true">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="249.0" layoutY="240.0" prefHeight="146.0" prefWidth="126.0" style="-fx-border-radius: 0.1em;">
+               <children>
+                  <Label layoutX="7.0" prefHeight="43.0" prefWidth="112.0" text="Program:">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="97.0" text="Reponsibility:">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="29.0" prefHeight="43.0" prefWidth="118.0" text="Master of Information Technology" wrapText="true">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="105.0" prefHeight="43.0" prefWidth="118.0" text="GUI Design" wrapText="true">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/gui.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+               </children>
+            </Pane>
+            <Hyperlink fx:id="jianping1" layoutX="113.0" layoutY="175.0" onAction="#goMurli" prefHeight="65.0" prefWidth="173.0" text="Murlikrishna Viswanathan, Associate Teaching Professor of Information Technology" textFill="#6638f0" underline="true" wrapText="true">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink fx:id="rui" layoutX="394.0" layoutY="584.0" onAction="#goRui" prefHeight="35.0" prefWidth="126.0" text="Final Boss" textFill="#6638f0" underline="true" wrapText="true">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink fx:id="shanyue" layoutX="667.0" layoutY="379.0" onAction="#goShanyue" prefHeight="35.0" prefWidth="126.0" text="Shanyue WAN" textFill="#6638f0" underline="true" wrapText="true">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink layoutX="394.0" layoutY="379.0" onAction="#goXu" prefHeight="35.0" prefWidth="126.0" text="Xu ZHENG" textFill="#6638f0" underline="true" wrapText="true" fx:id="xuHyper">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink fx:id="jianping" layoutX="113.0" layoutY="379.0" onAction="#goJianping" prefHeight="35.0" prefWidth="126.0" text="Jianping DENG" textFill="#6638f0" underline="true" wrapText="true">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Hyperlink>
+            <ImageView fitHeight="126.0" fitWidth="126.0" layoutX="394.0" layoutY="458.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/zhouye.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="126.0" fitWidth="126.0" layoutX="113.0" layoutY="458.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/m4.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="126.0" fitWidth="126.0" layoutX="667.0" layoutY="252.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/m3.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="126.0" fitWidth="126.0" layoutX="394.0" layoutY="252.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/m2.jpeg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="126.0" fitWidth="126.0" layoutX="113.0" layoutY="252.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/m1.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="22.0" layoutY="252.0" text="Students:" textFill="#bf3636">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="126.0" fitWidth="126.0" layoutX="113.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/murli.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="18.0" layoutY="41.0" text="Instructor:" textFill="#bf3636">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Pane layoutX="249.0" layoutY="444.0" prefHeight="154.0" prefWidth="126.0" style="-fx-border-radius: 0.1em;">
+               <children>
+                  <Label layoutX="7.0" prefHeight="43.0" prefWidth="112.0" text="Program:">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="97.0" text="Reponsibility:">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="29.0" prefHeight="59.0" prefWidth="118.0" text="Master of Information System Management (Global Track)" wrapText="true">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="114.0" prefHeight="43.0" prefWidth="118.0" text="Constructing Database" wrapText="true">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/database.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="803.0" layoutY="240.0" prefHeight="146.0" prefWidth="126.0" style="-fx-border-radius: 0.1em;">
+               <children>
+                  <Label layoutX="7.0" prefHeight="43.0" prefWidth="112.0" text="Program:">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="97.0" text="Reponsibility:">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="105.0" prefHeight="43.0" prefWidth="118.0" text="openCV" wrapText="true">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/opencv.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="29.0" prefHeight="59.0" prefWidth="118.0" text="Master of Information System Management (Global Track)" wrapText="true">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="531.0" layoutY="444.0" prefHeight="154.0" prefWidth="126.0" style="-fx-border-radius: 0.1em;">
+               <children>
+                  <Label layoutX="7.0" prefHeight="43.0" prefWidth="112.0" text="Program:">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="97.0" text="Reponsibility:">
+                     <font>
+                        <Font name="Arial Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="29.0" prefHeight="59.0" prefWidth="118.0" text="Master of Information System Management (Global Track)" wrapText="true">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="7.0" layoutY="114.0" prefHeight="43.0" prefWidth="118.0" text="Constructing Database" wrapText="true">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/database.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+               </children>
+            </Pane>
+            <ImageView disable="true" fitHeight="655.0" fitWidth="970.0" opacity="0.1" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/cmu_welcome.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</Pane>

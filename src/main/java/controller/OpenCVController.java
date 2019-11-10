@@ -188,7 +188,7 @@ public class OpenCVController {
     @FXML
     protected void startCamera() {
         // set a fixed width for the frame
-        originalFrame.setFitWidth(600);
+        // originalFrame.setFitWidth(600);
         // preserve image ratio
         originalFrame.setPreserveRatio(true);
 
@@ -319,7 +319,7 @@ public class OpenCVController {
             facesToBeRec.add(resizeImage);
         }
         //store
-        Imgcodecs.imwrite("resources/temp/temp.png", frame);
+        Imgcodecs.imwrite("src/main/resources/temp/temp.png", frame);
 
         ArrayList<RecognizedFace> returnedResults = new ArrayList<>();
         try {

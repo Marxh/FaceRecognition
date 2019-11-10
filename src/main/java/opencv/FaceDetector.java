@@ -83,9 +83,9 @@ public class FaceDetector {
             recognizedFace.setConfidence(confidence[0]);
             recognizedFace.setName(names.get(predictedLabel[0]));
             recognizedFace.setId(predictedLabel[0]);
-            String filepath = "resources/temp/temp_" + i + ".png";
+            String filepath = "src/main/resources/temp/temp_" + i + ".png";
             recognizedFace.setFilePath(filepath);
-            Imgcodecs.imwrite("resources/temp/temp_" + i + ".png", faces.get(i));
+            Imgcodecs.imwrite("src/main/resources/temp/temp_" + i + ".png", faces.get(i));
             recognizedFaces.add(recognizedFace);
         }
 

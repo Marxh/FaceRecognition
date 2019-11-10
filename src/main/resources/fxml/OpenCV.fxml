@@ -93,20 +93,20 @@
 	<center>
 		<VBox>
 			<children>
-				<ImageView fx:id="heinzLogo" fitHeight="120.0" fitWidth="454.0" pickOnBounds="true">
+				<ImageView fx:id="heinzLogo" fitHeight="120.0" fitWidth="546.0" pickOnBounds="true">
 					<image>
 						<Image url="@../images/heinzcmulogo.png" />
 					</image>
 				</ImageView>
 			</children>
    <children>
-   			<Separator orientation="VERTICAL" prefHeight="11.0" prefWidth="454.0" visible="false" />
+   			<Separator orientation="VERTICAL" prefHeight="11.0" prefWidth="546.0" visible="false" />
    </children>
 			<padding>
 				<Insets left="10" right="10" />
 			</padding>
 		    <children>
-				<ImageView fx:id="originalFrame" fitHeight="400" fitWidth="454.0" />
+				<ImageView fx:id="originalFrame" fitHeight="400" fitWidth="546.0" />
 		    </children>
 		</VBox>
 	</center>
