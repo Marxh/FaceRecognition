@@ -1,13 +1,12 @@
 package view;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class FilterPage extends Application {
+public class FilterPage {
     Stage primaryStage;
 
     public void start(Stage primaryStage) {
@@ -28,9 +27,5 @@ public class FilterPage extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -7,6 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import opencv.RecognizedFace;
+
+import java.util.ArrayList;
 
 public class CapturePageController {
 
@@ -55,9 +60,23 @@ public class CapturePageController {
     @FXML
     public Button enterButton;
 
+    public ArrayList<RecognizedFace> results = new ArrayList<>();
 
     public void init() {
-
+        OpenCVController controller = (OpenCVController) Context.controllers.get(OpenCVController.class.getSimpleName());
+        this.results = controller.results;
+        ArrayList<String> names = new ArrayList<>();
+        for (RecognizedFace face : results){
+            names.add(face.getName());
+        }
+        namesCombo.getItems().addAll(names);
+        namesCombo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue observable, String oldValue, String newValue) {
+                System.out.println(oldValue);
+                System.out.println(newValue);
+            }
+        });
     }
 
     @FXML

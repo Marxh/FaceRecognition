@@ -27,8 +27,7 @@ public class Main extends Application {
             Scene scene = new Scene(root);
             scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 
-            // create the stage with the given title and the previously created
-            // scene
+            // create the stage with the given title and the previously created scene
             primaryStage.setTitle("Wolf Disco!");
             primaryStage.setScene(scene);
             // show the GUI

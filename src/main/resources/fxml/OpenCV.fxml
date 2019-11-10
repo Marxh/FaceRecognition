@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="517.0" prefWidth="546.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OpenCVController">
+<BorderPane prefHeight="517.0" prefWidth="546.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OpenCVController">
    <top>
 		<VBox>
    			<children>
+
 				<HBox alignment="CENTER">
 					<children>
 						<Button fx:id="homepage" mnemonicParsing="false" onAction="#goHome" prefHeight="10.0" prefWidth="86.0" style="-fx-background-radius: 0;" text="Home">
@@ -91,49 +93,63 @@
 	<center>
 		<VBox>
 			<children>
-				<ImageView fx:id="heinzLogo"  fitHeight="120.0" fitWidth="546.0" pickOnBounds="true" >
+				<ImageView fx:id="heinzLogo" fitHeight="120.0" fitWidth="454.0" pickOnBounds="true">
 					<image>
 						<Image url="@../images/heinzcmulogo.png" />
 					</image>
 				</ImageView>
 			</children>
-			<Separator orientation="VERTICAL" prefHeight="11.0" prefWidth="546.0" visible="false" />
+   <children>
+   			<Separator orientation="VERTICAL" prefHeight="11.0" prefWidth="454.0" visible="false" />
+   </children>
 			<padding>
 				<Insets left="10" right="10" />
 			</padding>
 		    <children>
-				<ImageView fx:id="originalFrame" fitHeight="400" fitWidth="546.0" />
+				<ImageView fx:id="originalFrame" fitHeight="400" fitWidth="454.0" />
 		    </children>
 		</VBox>
 	</center>
 	<bottom>
-		<VBox alignment="CENTER" prefHeight="0.0" prefWidth="454.0">
+		<VBox alignment="CENTER" prefHeight="0.0" prefWidth="546.0">
 			<padding>
 				<Insets bottom="25" left="25" right="25" top="25" />
 			</padding>
-   		<children>
-   			<Button fx:id="cameraButton" alignment="center" disable="true" onAction="#startCamera" text="Start camera" />
-   		</children>
-
-		<HBox alignment="CENTER" prefHeight="0.0" prefWidth="454.0">
-			<children>
-				<Hyperlink fx:id="urlOpenCV" layoutX="100.0" layoutY="21.0" onAction="#openUrlOpenCV" text="\@OpenCV" textFill="#030202" underline="true">
-					<font>
-						<Font name="Arial Bold" size="13.0" />
-					</font>
-				</Hyperlink>
-				<Hyperlink fx:id="urlCMU" layoutX="201.0" layoutY="21.0" onAction="#openUrlCMU" text="\@CMU" textFill="#070606" underline="true">
-					<font>
-						<Font name="Arial Bold" size="13.0" />
-					</font>
-				</Hyperlink>
-				<Hyperlink fx:id="urlHelp" layoutX="288.0" layoutY="21.0" onAction="#openUrlHelp" text="Help" textFill="#070606" underline="true">
-					<font>
-						<Font name="Arial Bold" size="13.0" />
-					</font>
-				</Hyperlink>
-			</children>
-		</HBox>
+   <children>
+   			<HBox fx:id="captureHBox" alignment="CENTER" prefHeight="32.0" prefWidth="454.0">
+   				<children>
+   					<Button fx:id="cameraButton" alignment="CENTER_LEFT" disable="true" onAction="#startCamera" text="Start camera" />
+   					<Button fx:id="captureButton" alignment="CENTER_RIGHT" defaultButton="true" mnemonicParsing="false" onAction="#goCapture" prefHeight="24.0" prefWidth="37.0">
+   						<graphic>
+      							<ImageView fitHeight="12.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+      								<image>
+      									<Image url="@../images/tool_capture.png" />
+      								</image>
+      							</ImageView>
+   						</graphic>
+   					</Button>
+   				</children>
+   			</HBox>
+   		<HBox alignment="CENTER" prefHeight="0.0" prefWidth="546.0">
+   			<children>
+   				<Hyperlink fx:id="urlOpenCV" layoutX="100.0" layoutY="21.0" onAction="#openUrlOpenCV" text="\@OpenCV" textFill="#030202" underline="true">
+   					<font>
+   						<Font name="Arial Bold" size="13.0" />
+   					</font>
+   				</Hyperlink>
+   				<Hyperlink fx:id="urlCMU" layoutX="201.0" layoutY="21.0" onAction="#openUrlCMU" text="\@CMU" textFill="#070606" underline="true">
+   					<font>
+   						<Font name="Arial Bold" size="13.0" />
+   					</font>
+   				</Hyperlink>
+   				<Hyperlink fx:id="urlHelp" layoutX="288.0" layoutY="21.0" onAction="#openUrlHelp" text="Help" textFill="#070606" underline="true">
+   					<font>
+   						<Font name="Arial Bold" size="13.0" />
+   					</font>
+   				</Hyperlink>
+   			</children>
+   		</HBox>
+   </children>
 		</VBox>
 	</bottom>
 </BorderPane>

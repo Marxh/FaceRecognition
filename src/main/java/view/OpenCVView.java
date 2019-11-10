@@ -1,13 +1,11 @@
 package view;
 
 import controller.OpenCVController;
-import org.opencv.core.Core;
-
-import javafx.application.Application;
-import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
+import org.opencv.core.Core;
 
 /**
  * The main class for a JavaFX application. It creates and handle the main

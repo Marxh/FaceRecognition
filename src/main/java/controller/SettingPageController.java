@@ -3,7 +3,6 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -14,9 +13,7 @@ public class SettingPageController {
     @FXML
     public Button apply;
     @FXML
-    public CheckBox haarCheckBox;
-    @FXML
-    public CheckBox LBPCheckBox;
+    public Button cancel;
 
     public void doApply(ActionEvent actionEvent) {
 
