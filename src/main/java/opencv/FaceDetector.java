@@ -20,7 +20,6 @@ import java.util.List;
 public class FaceDetector {
 
     private HashMap<Integer, String> names = new HashMap<>();
-    //private LBPHFaceRecognizer faceRecognizer = LBPHFaceRecognizer.create();
     private FisherFaceRecognizer faceRecognizer = FisherFaceRecognizer.create();
     private CascadeClassifier faceCascade = new CascadeClassifier();
 

@@ -11,13 +11,11 @@ import opencv.FaceEmotion;
 public class FaceEmotionUtils {
     public static void main(String[] args) throws Exception{
         //test
-        FaceEmotion face_1 = new FaceEmotion("Shanyue Wan", "resources/trainingset/combined/7-shanyue_3.png");
-        FaceEmotion face_2 = new FaceEmotion("Xinrui Zheng", "resources/trainingset/combined/5-xinrui_4.png");
-        FaceEmotion face_3 = new FaceEmotion("Xinrui Zheng", "resources/trainingset/combined/5-xinrui_2.png");
+        FaceEmotion face_1 = new FaceEmotion("Shanyue Wan", "resources/trainingset/grayscaletrain/1-xuzheng_8.png");
+        FaceEmotion face_2 = new FaceEmotion("Xinrui Zheng", "resources/trainingset/grayscaletrain/1-xuzheng_12.png");
         ArrayList<FaceEmotion> faces = new ArrayList<>();
         faces.add(face_1);
         faces.add(face_2);
-        faces.add(face_3);
         ArrayList<FaceEmotion> results = detectEmotion(faces);
         for (FaceEmotion result : results){
             System.out.println(result.getName()+" " + result.getFilepath()+"\n" +
