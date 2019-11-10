@@ -59,15 +59,15 @@ public class OpenCVController
 {
 	// FXML buttons
 	@FXML
-	private Button cameraButton;
+	private static Button cameraButton;
 	// the FXML area for showing the current frame
 	@FXML
 	private ImageView originalFrame;
 	// checkboxes for enabling/disabling a classifier
 	@FXML
-	private CheckBox haarClassifier;
+	private static CheckBox haarClassifier;
 	@FXML
-	private CheckBox lbpClassifier;
+	private static CheckBox lbpClassifier;
 	@FXML
 	private CheckBox newUser;
 	@FXML
@@ -193,12 +193,8 @@ public class OpenCVController
 		this.capture = new VideoCapture();
 		this.faceCascade = new CascadeClassifier();
 		this.absoluteFaceSize = 0;
-		
-		// disable 'new user' functionality
-		//this.newUserNameSubmit.setDisable(true);
-		//this.newUserName.setDisable(true);
-		// Takes some time thus use only when training set
-		// was updated 
+		this.checkboxSelection("resources/haarcascades/haarcascade_frontalface_alt.xml");
+		haarClassifier.setSelected(true);
 		trainModel();
 	}
 	
@@ -498,8 +494,7 @@ public class OpenCVController
 	 * the trained set to be used for frontal face detection.
 	 */
 	@FXML
-	protected void lbpSelected(Event event)
-	{
+	protected void lbpSelected(Event event){
 		// check whether the haar checkbox is selected and deselect it
 		if (this.haarClassifier.isSelected())
 			this.haarClassifier.setSelected(false);
@@ -514,8 +509,7 @@ public class OpenCVController
 	 * @param classifierPath
 	 *            the path on disk where a classifier trained set is located
 	 */
-	private void checkboxSelection(String classifierPath)
-	{
+	private void checkboxSelection(String classifierPath){
 		// load the classifier(s)
 		this.faceCascade.load(classifierPath);
 		
