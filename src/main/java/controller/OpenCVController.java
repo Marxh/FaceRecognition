@@ -16,7 +16,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Hyperlink;
 import javafx.stage.Stage;
-import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
@@ -25,12 +24,10 @@ import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
-import org.opencv.face.Face;
 import org.opencv.face.LBPHFaceRecognizer;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.objdetect.Objdetect;
-import org.opencv.video.Video;
 import org.opencv.videoio.VideoCapture;
 
 
@@ -41,11 +38,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import org.opencv.face.BasicFaceRecognizer;
 import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.face.FaceRecognizer;
 import view.FilterPage;
-import view.HomePage;
+import legacy.HomePage;
 import view.SettingPage;
 
 
@@ -216,7 +211,7 @@ public class OpenCVController
 	protected void startCamera()
 	{
 		// set a fixed width for the frame
-		originalFrame.setFitWidth(600);
+		//originalFrame.setFitWidth(600);
 		// preserve image ratio
 		originalFrame.setPreserveRatio(true);
 		

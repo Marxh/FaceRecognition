@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import view.AboutUsPage;
-import view.HomePage;
+import legacy.HomePage;
 
 public class LoginController {
     @FXML

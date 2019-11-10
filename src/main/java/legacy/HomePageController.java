@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 
 import view.CapturePage;
 import view.FilterPage;
-import view.HomePage;
 import view.SettingPage;
 
 import java.awt.*;

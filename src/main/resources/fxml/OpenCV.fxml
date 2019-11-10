@@ -92,23 +92,23 @@
 	<center>
 		<VBox>
 			<children>
-				<ImageView fx:id="heinzLogo"  fitHeight="120.0" fitWidth="454.0" pickOnBounds="true" >
+				<ImageView fx:id="heinzLogo"  fitHeight="120.0" fitWidth="546.0" pickOnBounds="true" >
 					<image>
 						<Image url="@../images/heinzcmulogo.png" />
 					</image>
 				</ImageView>
 			</children>
-			<Separator orientation="VERTICAL" prefHeight="11.0" prefWidth="454.0" visible="false" />
+			<Separator orientation="VERTICAL" prefHeight="11.0" prefWidth="546.0" visible="false" />
 			<padding>
 				<Insets left="10" right="10" />
 			</padding>
 		    <children>
-				<ImageView fx:id="originalFrame" fitHeight="400" fitWidth="454.0" />
+				<ImageView fx:id="originalFrame" fitHeight="400" fitWidth="546.0" />
 		    </children>
 		</VBox>
 	</center>
 	<bottom>
-		<VBox alignment="CENTER" prefHeight="0.0" prefWidth="546.0">
+		<VBox alignment="CENTER" prefHeight="0.0" prefWidth="454.0">
 			<padding>
 				<Insets bottom="25" left="25" right="25" top="25" />
 			</padding>
@@ -116,7 +116,7 @@
    			<Button fx:id="cameraButton" alignment="center" disable="true" onAction="#startCamera" text="Start camera" />
    		</children>
 
-		<HBox alignment="CENTER" prefHeight="0.0" prefWidth="546.0">
+		<HBox alignment="CENTER" prefHeight="0.0" prefWidth="454.0">
 			<children>
 				<Hyperlink fx:id="urlOpenCV" layoutX="100.0" layoutY="21.0" onAction="#openUrlOpenCV" text="\@OpenCV" textFill="#030202" underline="true">
 					<font>
