@@ -165,10 +165,6 @@ public class OpenCVController {
     @FXML
     public void goCapture(ActionEvent actionEvent) {
         this.results = capture();
-        //for (RecognizedFace face : results) {
-            //System.out.println(face.getName());
-            //System.out.println(face.getConfidence());
-        //}
 
 
         CapturePage capturePage = new CapturePage();
@@ -336,7 +332,7 @@ public class OpenCVController {
             RecognizedFace face = returnedResults.get(i);
             double confidence = face.getConfidence();
 
-            if (confidence < 0.7) {
+            if (confidence < 3000) {
                 face.setName("Unknown");
             }
         }

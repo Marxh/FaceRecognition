@@ -66,8 +66,15 @@ public class CapturePageController {
         OpenCVController controller = (OpenCVController) Context.controllers.get(OpenCVController.class.getSimpleName());
         this.results = controller.results;
         ArrayList<String> names = new ArrayList<>();
-        for (RecognizedFace face : results){
-            names.add(face.getName());
+        int known = 0, unknown = 0;
+        for (RecognizedFace face : results) {
+            String name = face.getName();
+            names.add(name);
+            if (name.equals("Unknown")){
+                unknown++;
+            }else{
+                known++;
+            }
         }
         namesCombo.getItems().addAll(names);
         namesCombo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -77,6 +84,10 @@ public class CapturePageController {
                 System.out.println(newValue);
             }
         });
+
+        totalDetected.setText(String.valueOf(results.size()));
+        totalUnRecognized.setText(String.valueOf(unknown));
+        totalRecognized.setText(String.valueOf(known));
     }
 
     @FXML
