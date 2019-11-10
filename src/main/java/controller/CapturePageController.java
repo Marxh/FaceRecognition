@@ -7,10 +7,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import jdk.internal.util.xml.impl.Input;
 import opencv.RecognizedFace;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class CapturePageController {
@@ -62,8 +68,11 @@ public class CapturePageController {
 
     public ArrayList<RecognizedFace> results = new ArrayList<>();
 
-    public void init() {
+    public void init() throws FileNotFoundException {
         OpenCVController controller = (OpenCVController) Context.controllers.get(OpenCVController.class.getSimpleName());
+        InputStream inputStream = new FileInputStream(new File("resources/temp/temp.png"));
+        Image image = new Image(inputStream);
+        photoDetected.setImage(image);
         this.results = controller.results;
         ArrayList<String> names = new ArrayList<>();
         int known = 0, unknown = 0;
@@ -88,6 +97,15 @@ public class CapturePageController {
         totalDetected.setText(String.valueOf(results.size()));
         totalUnRecognized.setText(String.valueOf(unknown));
         totalRecognized.setText(String.valueOf(known));
+    }
+
+    @FXML
+    public void comboAction() {
+        namesCombo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override public void changed(ObservableValue<? extends String> selected, String oldName, String newName) {
+                System.out.println(newName);
+            }
+        });
     }
 
     @FXML

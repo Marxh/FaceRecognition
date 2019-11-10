@@ -319,7 +319,7 @@ public class OpenCVController {
             facesToBeRec.add(resizeImage);
         }
         //store
-        Imgcodecs.imwrite("src/main/resources/temp/temp.png", frame);
+        Imgcodecs.imwrite("resources/temp/temp.png", frame);
 
         ArrayList<RecognizedFace> returnedResults = new ArrayList<>();
         try {

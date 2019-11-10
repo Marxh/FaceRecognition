@@ -33,8 +33,7 @@ public class Main extends Application {
             // show the GUI
             primaryStage.show();
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -98,22 +98,16 @@
                </graphic>
             </Label>
             <ImageView fx:id="photoDetected" fitHeight="318.5" fitWidth="518.0" layoutX="1.0" layoutY="46.5" pickOnBounds="true">
-               <image>
-                  <Image url="@../temp/temp.png" />
-               </image>
             </ImageView>
          </children>
       </Pane>
       <Pane layoutX="707.0" layoutY="78.0" prefHeight="99.0" prefWidth="126.0" style="-fx-border-color: #323232;">
          <children>
             <ImageView fx:id="croppedPhoto" fitHeight="97.0" fitWidth="124.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../temp/temp.png" />
-               </image>
             </ImageView>
          </children>
       </Pane>
-      <ComboBox fx:id="namesCombo" layoutX="544.0" layoutY="78.0" prefWidth="150.0" promptText="Name" style="-fx-border-color: #323232; -fx-background-color: #FFFFFF; -fx-border-radius: 0.5em;" />
+      <ComboBox fx:id="namesCombo" onAction="#comboAction" layoutX="544.0" layoutY="78.0" prefWidth="150.0" promptText="Name" style="-fx-border-color: #323232; -fx-background-color: #FFFFFF; -fx-border-radius: 0.5em;" />
       <Pane layoutX="544.0" layoutY="189.0" prefHeight="366.0" prefWidth="291.0" style="-fx-border-color: #323232;">
          <children>
             <Line endX="189.0" layoutX="101.0" layoutY="46.0" startX="-100.0" />
