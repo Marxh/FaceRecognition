@@ -1,13 +1,12 @@
 package view;
 
-import controller.SettingPageController;
+import controller.EmotionPageController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class SettingPage {
+public class EmotionPage {
     Stage primaryStage;
 
     public void start(Stage primaryStage) {
@@ -15,18 +14,17 @@ public class SettingPage {
         primaryStage.setResizable(false);
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/settingPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/emotionPage.fxml"));
             Pane root = (Pane) loader.load();
             root.setStyle("-fx-background-color: whitesmoke;");
 
             Scene scene = new Scene(root);
-            primaryStage.setTitle("Setting");
+            primaryStage.setTitle("Emotion Analysis");
             primaryStage.setScene(scene);
 
             primaryStage.show();
 
-            // init the controller
-            SettingPageController controller = loader.getController();
+            EmotionPageController controller = loader.getController();
             controller.init();
 
         } catch (Exception e) {

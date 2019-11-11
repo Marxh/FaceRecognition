@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import jdk.internal.util.xml.impl.Input;
 import opencv.RecognizedFace;
+import view.EmotionPage;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -69,6 +70,7 @@ public class CapturePageController {
     public ArrayList<RecognizedFace> results = new ArrayList<>();
 
     public void init() throws FileNotFoundException {
+        Context.controllers.put(this.getClass().getSimpleName(), this);
         OpenCVController controller = (OpenCVController) Context.controllers.get(OpenCVController.class.getSimpleName());
         InputStream inputStream = new FileInputStream(new File("resources/temp/temp.png"));
         Image image = new Image(inputStream);
@@ -79,9 +81,9 @@ public class CapturePageController {
         for (RecognizedFace face : results) {
             String name = face.getName();
             names.add(name);
-            if (name.equals("Unknown")){
+            if (name.equals("Unknown")) {
                 unknown++;
-            }else{
+            } else {
                 known++;
             }
         }
@@ -89,8 +91,17 @@ public class CapturePageController {
         namesCombo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue observable, String oldValue, String newValue) {
-                System.out.println(oldValue);
-                System.out.println(newValue);
+                try{
+                    for (RecognizedFace face : results) {
+                        if(face.getName().equals(newValue)){
+                            InputStream inputStream = new FileInputStream(new File(face.getFilePath()));
+                            Image image = new Image(inputStream);
+                            croppedPhoto.setImage(image);
+                        }
+                    }
+                }catch (FileNotFoundException e){
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -102,7 +113,8 @@ public class CapturePageController {
     @FXML
     public void comboAction() {
         namesCombo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override public void changed(ObservableValue<? extends String> selected, String oldName, String newName) {
+            @Override
+            public void changed(ObservableValue<? extends String> selected, String oldName, String newName) {
                 System.out.println(newName);
             }
         });
@@ -130,6 +142,11 @@ public class CapturePageController {
     }
 
     public void doEmotionAnalysis() {
+        EmotionPage emotionPage = new EmotionPage();
+        emotionPage.start(new Stage());
+    }
 
+    public ArrayList<RecognizedFace> getResults(){
+        return results;
     }
 }

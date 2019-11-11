@@ -48,11 +48,6 @@ public class OpenCVController {
     // the FXML area for showing the current frame
     @FXML
     private ImageView originalFrame;
-    // checkboxes for enabling/disabling a classifier
-    @FXML
-    private CheckBox haarClassifier;
-    @FXML
-    private CheckBox lbpClassifier;
     @FXML
     public Button homepage;
     @FXML
@@ -69,6 +64,8 @@ public class OpenCVController {
     public HBox captureHBox;
 
     public ArrayList<RecognizedFace> results;
+
+    public double threshold;
 
     // a timer for acquiring the video stream
     private ScheduledExecutorService timer;
@@ -193,12 +190,6 @@ public class OpenCVController {
         originalFrame.setPreserveRatio(true);
 
         if (!this.cameraActive) {
-            // disable setting checkboxes
-            this.haarClassifier.setDisable(true);
-            this.lbpClassifier.setDisable(true);
-
-            // disable 'New user' checkbox
-            //this.newUser.setDisable(true);
 
             // start the video capture
             this.capture.open(0);
@@ -231,9 +222,6 @@ public class OpenCVController {
             this.cameraActive = false;
             // update again the button content
             this.cameraButton.setText("Start Camera");
-            // enable classifiers checkboxes
-            this.haarClassifier.setDisable(false);
-            this.lbpClassifier.setDisable(false);
 
             // stop the timer
             try {
@@ -332,9 +320,10 @@ public class OpenCVController {
             RecognizedFace face = returnedResults.get(i);
             double confidence = face.getConfidence();
 
-            if (confidence < 3000) {
+            if (confidence < this.threshold) {
                 face.setName("Unknown");
             }
+            System.out.println(threshold);
         }
         return returnedResults;
     }
@@ -444,38 +433,11 @@ public class OpenCVController {
     }
 
     /**
-     * The action triggered by selecting the Haar Classifier checkbox. It loads
-     * the trained set to be used for frontal face detection.
-     */
-    @FXML
-    protected void haarSelected(Event event) {
-        // check whether the lpb checkbox is selected and deselect it
-        if (this.lbpClassifier.isSelected())
-            this.lbpClassifier.setSelected(false);
-
-        this.checkboxSelection("resources/haarcascades/haarcascade_frontalface_alt.xml");
-    }
-
-    /**
-     * The action triggered by selecting the LBP Classifier checkbox. It loads
-     * the trained set to be used for frontal face detection.
-     */
-    @FXML
-    protected void lbpSelected(Event event) {
-        // check whether the haar checkbox is selected and deselect it
-        if (this.haarClassifier.isSelected())
-            this.haarClassifier.setSelected(false);
-
-        this.checkboxSelection("resources/lbpcascades/lbpcascade_frontalface.xml");
-    }
-
-
-    /**
      * Method for loading a classifier trained set from disk
      *
      * @param classifierPath the path on disk where a classifier trained set is located
      */
-    private void checkboxSelection(String classifierPath) {
+    public void checkboxSelection(String classifierPath) {
         // load the classifier(s)
         this.faceDetector.cascadeLoad(classifierPath);
 
@@ -499,4 +461,7 @@ public class OpenCVController {
         return new Image(new ByteArrayInputStream(buffer.toArray()));
     }
 
+    public void setThreshold(double threshold) {
+        this.threshold = threshold;
+    }
 }

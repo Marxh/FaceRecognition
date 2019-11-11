@@ -80,10 +80,6 @@
 					<padding>
 						<Insets bottom="10" top="10" />
 					</padding>
-					<children>
-						<CheckBox fx:id="haarClassifier" onAction="#haarSelected" text="Haar Classifier" />
-						<CheckBox fx:id="lbpClassifier" onAction="#lbpSelected" text="LBP Classifier" />
-					</children>
 				</HBox>
    			<Separator />
    			</children>

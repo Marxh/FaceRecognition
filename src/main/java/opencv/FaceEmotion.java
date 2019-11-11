@@ -8,6 +8,10 @@ public class FaceEmotion {
     private String angerLikelihood;
     private String surpriseLikelihood;
 
+    public FaceEmotion(){
+
+    }
+
     public FaceEmotion(String name, String filepath){
         this.name = name;
         this.filepath = filepath;

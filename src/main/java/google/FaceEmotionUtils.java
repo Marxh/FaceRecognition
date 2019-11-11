@@ -59,10 +59,11 @@ public class FaceEmotionUtils {
         return faces;
     }
 
-    public static FaceEmotion detectEmotion(FaceEmotion face) throws Exception {
+    public static FaceEmotion detectEmotion(String filepath) throws Exception {
+        FaceEmotion face = new FaceEmotion();
         List<AnnotateImageRequest> requests = new ArrayList<>();
 
-        ByteString imgBytes = ByteString.readFrom(new FileInputStream(face.getFilepath()));
+        ByteString imgBytes = ByteString.readFrom(new FileInputStream(filepath));
 
         Image img = Image.newBuilder().setContent(imgBytes).build();
         Feature feature = Feature.newBuilder().setType(Feature.Type.FACE_DETECTION).build();
