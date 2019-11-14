@@ -9,7 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import view.AboutUsPage;
-import view.HomePage;
 
 public class LoginController {
     @FXML
@@ -32,8 +31,8 @@ public class LoginController {
         if ( !_user.equals("jianpind") || !_pass.equals("123456")) {
 
         } else {
-            HomePage homePage = new HomePage();
-            homePage.start(new Stage());
+//            HomePage homePage = new HomePage();
+//            homePage.start(new Stage());
 
             Stage stage = (Stage) loginButton.getScene().getWindow();
             stage.close();

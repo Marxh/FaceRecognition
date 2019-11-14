@@ -152,8 +152,8 @@ public class OpenCVController {
 
     @FXML
     public void goHome(ActionEvent actionEvent) {
-        HomePage home = new HomePage();
-        home.start(new Stage());
+//        HomePage home = new HomePage();
+//        home.start(new Stage());
 
         Stage stage = (Stage) homepage.getScene().getWindow();
         stage.close();
