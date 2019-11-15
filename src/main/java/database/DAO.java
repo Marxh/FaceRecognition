@@ -11,6 +11,8 @@ import models.LogEntity;
 import models.StudentEntity;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DAO {
     private static Connection conn;
@@ -98,17 +100,19 @@ public class DAO {
         return null;
     }
 
-    public static LogEntity selectStuLog(String stuID) {
-        String sql = "select * from `Student_Log` where Stu_ID = ? and `Student_Log`.`Visit_Time`=(select max(Visit_Time) FROM\n" +
-                "`Student_Log` where Stu_ID = ?);";
+    public static List<LogEntity> selectStuLog(String stuID) {
+        String sql = "select * from `Student_Log` where Stu_ID = ?;";
+        LogEntity logEntity;
+        List<LogEntity> logs = new ArrayList<>();
         try {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, stuID);
-            preparedStatement.setString(2, stuID);
             ResultSet rs=preparedStatement.executeQuery();
-            rs.next();
-            LogEntity logEntity = new LogEntity(rs.getString(1),rs.getDate(2),rs.getString(3));
-            return logEntity;
+            while(rs.next()){
+                logEntity = new LogEntity(rs.getString(1),rs.getDate(2),rs.getString(3));
+                logs.add(logEntity);
+            }
+            return logs;
         } catch (SQLException e) {
             e.printStackTrace();
         }

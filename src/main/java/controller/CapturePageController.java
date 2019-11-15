@@ -1,6 +1,9 @@
 package controller;
 
 import database.DAO;
+import database.PieChartService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 import models.LogEntity;
 import models.StudentEntity;
@@ -23,6 +26,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CapturePageController {
 
@@ -77,7 +81,9 @@ public class CapturePageController {
 
     private ErrorView errorView = new ErrorView();
 
-    public ArrayList<RecognizedFace> results = new ArrayList<>();
+    private ArrayList<RecognizedFace> results = new ArrayList<>();
+
+    private PieChartService pieChartService = new PieChartService();
 
     public void init() throws FileNotFoundException {
         updateButton.setDisable(true);
@@ -122,6 +128,8 @@ public class CapturePageController {
                             LogEntity log = DAO.selectLatestLog(face.getId());
                             historyTimeField.setText(log.getVisitTime().toString());
                             historyReason.setText(log.getReason());
+                            returnedSimilarity.setText(String.format("%.2f", face.getConfidence()));
+                            changePieChart();
                             break;
                         }
                     }
@@ -139,7 +147,6 @@ public class CapturePageController {
                 }
             }
         });
-
         totalDetected.setText(String.valueOf(results.size()));
         totalUnRecognized.setText(String.valueOf(unknown));
         totalRecognized.setText(String.valueOf(known));
@@ -186,6 +193,12 @@ public class CapturePageController {
         errorView.start("Log Insert Success.");
     }
 
+    @FXML
+    public void exit(){
+        Stage stage = (Stage) exit.getScene().getWindow();
+        stage.close();
+    }
+
     public void doEmotionAnalysis() {
         EmotionPage emotionPage = new EmotionPage();
         emotionPage.start(new Stage());
@@ -193,5 +206,10 @@ public class CapturePageController {
 
     public ArrayList<RecognizedFace> getResults(){
         return results;
+    }
+
+    private void changePieChart(){
+        ObservableList<PieChart.Data> dataSet = pieChartService.getPieChartData(currentFaceID);
+        pieChart.setData(FXCollections.observableArrayList(dataSet));
     }
 }
