@@ -1,4 +1,4 @@
-package opencv;
+package models;
 
 public class FaceEmotion {
     private String name;

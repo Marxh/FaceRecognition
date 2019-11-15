@@ -1,5 +1,9 @@
 package controller;
 
+import database.DAO;
+import javafx.scene.chart.PieChart;
+import models.LogEntity;
+import models.StudentEntity;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -10,9 +14,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import jdk.internal.util.xml.impl.Input;
-import opencv.RecognizedFace;
+import models.RecognizedFace;
 import view.EmotionPage;
+import view.ErrorView;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,53 +27,62 @@ import java.util.ArrayList;
 public class CapturePageController {
 
     @FXML
-    public Button save;
+    private Button save;
     @FXML
-    public Label totalDetected;
+    private Label totalDetected;
     @FXML
-    public Label totalRecognized;
+    private Label totalRecognized;
     @FXML
-    public Label totalUnRecognized;
+    private Label totalUnRecognized;
     @FXML
-    public ImageView photoDetected;
+    private ImageView photoDetected;
     @FXML
-    public ImageView croppedPhoto;
+    private ImageView croppedPhoto;
     @FXML
     public ComboBox namesCombo;
     @FXML
-    public TextField nameField;
+    private TextField nameField;
     @FXML
-    public TextField sexField;
+    private TextField sexField;
     @FXML
-    public TextField idField;
+    private TextField idField;
     @FXML
-    public TextField programField;
+    private TextField programField;
     @FXML
-    public TextField countryField;
+    private TextField countryField;
     @FXML
-    public TextField dobField;
+    private TextField ageField;
     @FXML
-    public TextField remarkField;
+    private TextField remarkField;
     @FXML
-    public Button updateButton;
+    private Button updateButton;
     @FXML
-    public Button emotionButton;
+    private Button emotionButton;
     @FXML
-    public Label returnedSimilarity;
+    private Label returnedSimilarity;
     @FXML
-    public Button exit;
+    private Button exit;
     @FXML
-    public TextField historyTimeField;
+    private TextField historyTimeField;
     @FXML
-    public TextField historyReason;
+    private TextField historyReason;
     @FXML
-    public TextField visitingReason;
+    private TextField visitingReason;
     @FXML
-    public Button enterButton;
+    private Button enterButton;
+    @FXML
+    private PieChart pieChart;
+
+    private String currentFaceID = "Unknown";
+
+    private ErrorView errorView = new ErrorView();
 
     public ArrayList<RecognizedFace> results = new ArrayList<>();
 
     public void init() throws FileNotFoundException {
+        updateButton.setDisable(true);
+        emotionButton.setDisable(true);
+        enterButton.setDisable(true);
         Context.controllers.put(this.getClass().getSimpleName(), this);
         OpenCVController controller = (OpenCVController) Context.controllers.get(OpenCVController.class.getSimpleName());
         InputStream inputStream = new FileInputStream(new File("resources/temp/temp.png"));
@@ -97,7 +110,29 @@ public class CapturePageController {
                             InputStream inputStream = new FileInputStream(new File(face.getFilePath()));
                             Image image = new Image(inputStream);
                             croppedPhoto.setImage(image);
+                            StudentEntity stud = DAO.selectStudent(face.getId());
+                            nameField.setText(stud.getStudentName());
+                            sexField.setText(stud.getGender());
+                            idField.setText(stud.getStudentID());
+                            countryField.setText(stud.getCountry());
+                            programField.setText(stud.getProgram());
+                            ageField.setText(stud.getGender());
+                            remarkField.setText(stud.getRemark());
+                            currentFaceID = stud.getStudentID();
+                            LogEntity log = DAO.selectLatestLog(face.getId());
+                            historyTimeField.setText(log.getVisitTime().toString());
+                            historyReason.setText(log.getReason());
+                            break;
                         }
+                    }
+                    if(currentFaceID.equals("Unknown")) {
+                        updateButton.setDisable(false);
+                        enterButton.setDisable(true);
+                        emotionButton.setDisable(true);
+                    }else{
+                        updateButton.setDisable(true);
+                        enterButton.setDisable(false);
+                        emotionButton.setDisable(false);
                     }
                 }catch (FileNotFoundException e){
                     e.printStackTrace();
@@ -112,12 +147,6 @@ public class CapturePageController {
 
     @FXML
     public void comboAction() {
-        namesCombo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> selected, String oldName, String newName) {
-                System.out.println(newName);
-            }
-        });
     }
 
     @FXML
@@ -133,12 +162,28 @@ public class CapturePageController {
 
     @FXML
     public void doUpdate() {
-
+        if(nameField.getText().equals("") | sexField.getText().equals("") | idField.getText().equals("")|
+                programField.getText().equals("") | countryField.getText().equals("")|
+                countryField.getText().equals("") | ageField.getText().equals("")|
+                remarkField.getText().equals("")){
+            errorView.start("Input not complete.");
+            return;
+        }
+        StudentEntity studentEntity = new StudentEntity(idField.getText(), nameField.getText(), Integer.parseInt(ageField.getText()),
+                programField.getText(), sexField.getText(), countryField.getText(), remarkField.getText());
+        DAO.insertStudent(studentEntity);
+        currentFaceID = idField.getText();
+        errorView.start("Insert Success.");
     }
 
     @FXML
     public void doEnter() {
-
+        if(visitingReason.getText().equals("")){
+            errorView.start("Input not complete.");
+            return;
+        }
+        DAO.insertLog(new LogEntity(currentFaceID, visitingReason.getText()));
+        errorView.start("Log Insert Success.");
     }
 
     public void doEmotionAnalysis() {

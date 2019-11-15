@@ -1,4 +1,4 @@
-package opencv;
+package models;
 
 public class RecognizedFace {
     private String id;

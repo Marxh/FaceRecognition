@@ -30,6 +30,8 @@
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="opencv-412" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="Maven: com.google.cloud:google-cloud-vision:1.97.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.cloud:google-cloud-core-grpc:1.91.2" level="project" />
     <orderEntry type="library" name="Maven: com.google.auth:google-auth-library-credentials:0.17.2" level="project" />
@@ -82,5 +84,6 @@
     <orderEntry type="library" name="Maven: com.google.api.grpc:proto-google-cloud-vision-v1p2beta1:1.79.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.api.grpc:proto-google-cloud-vision-v1p3beta1:0.80.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.api.grpc:proto-google-cloud-vision-v1p4beta1:0.80.0" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.0.8" level="project" />
   </component>
 </module>

@@ -1,6 +1,8 @@
-package opencv;
+package models;
 
 import google.FaceEmotionUtils;
+import models.FaceEmotion;
+import models.RecognizedFace;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;

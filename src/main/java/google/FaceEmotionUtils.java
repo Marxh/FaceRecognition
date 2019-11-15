@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.google.cloud.vision.v1.*;
 import com.google.protobuf.ByteString;
-import opencv.FaceEmotion;
+import models.FaceEmotion;
 
 public class FaceEmotionUtils {
     public static void main(String[] args) throws Exception{
