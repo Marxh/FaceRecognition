@@ -1,7 +1,6 @@
 package controller;
 
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -9,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import view.AboutUsPage;
+import view.ErrorView;
+import view.OpenCVView;
 
 public class LoginController {
     @FXML
@@ -22,6 +23,8 @@ public class LoginController {
     @FXML
     public ImageView cmuImage;
 
+    private ErrorView errorView = new ErrorView();
+
 
     @FXML
     private void doLogin() {
@@ -29,11 +32,10 @@ public class LoginController {
         String _pass = passwordField.getText();
 
         if ( !_user.equals("jianpind") || !_pass.equals("123456")) {
-
+            errorView.start("Wrong User Password.");
         } else {
-//            HomePage homePage = new HomePage();
-//            homePage.start(new Stage());
-
+            OpenCVView openCVView = new OpenCVView();
+            openCVView.start();
             Stage stage = (Stage) loginButton.getScene().getWindow();
             stage.close();
         }
@@ -41,7 +43,7 @@ public class LoginController {
 
     @FXML
     private void doExit() {
-        Platform.exit();
+        System.exit(0);
     }
 
     @FXML

@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import models.FaceEmotion;
 import models.RecognizedFace;
 
@@ -101,7 +102,8 @@ public class EmotionPageController {
     }
 
     public void goExit() {
-        Platform.exit();
+        Stage stage = (Stage) exit.getScene().getWindow();
+        stage.close();
     }
 
     public void setJoy(String joy) {
