@@ -25,7 +25,7 @@
             <Font name="System Bold" size="29.0" />
          </font>
       </Label>
-      <BarChart fx:id="reasonAttendanceBar" animated="false" layoutX="9.0" layoutY="369.0" prefHeight="278.0" prefWidth="909.0">
+      <BarChart fx:id="reasonAttendanceBar" animated="false" layoutX="9.0" layoutY="380.0" prefHeight="278.0" prefWidth="909.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
@@ -38,7 +38,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="36.0" layoutY="338.0" prefHeight="26.0" prefWidth="402.0" text="Attendance frequency By Gender and Category">
+      <Label layoutX="36.0" layoutY="354.0" prefHeight="26.0" prefWidth="402.0" text="Attendance frequency By Gender and Category">
          <font>
             <Font size="20.0" />
          </font>
