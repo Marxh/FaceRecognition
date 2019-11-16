@@ -118,4 +118,45 @@ public class DAO {
         }
         return null;
     }
+
+    public static List<LogEntity> selectAllLog() {
+        String sql = "select * from `Student_Log`;";
+        LogEntity logEntity;
+        List<LogEntity> logs = new ArrayList<>();
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            ResultSet rs=preparedStatement.executeQuery();
+            while(rs.next()){
+                logEntity = new LogEntity(rs.getString(1),rs.getDate(2),rs.getString(3));
+                logs.add(logEntity);
+            }
+            return logs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static List<LogEntity> selectLogGender() {
+        String sql = "select Student_Log.Stu_ID, Visit_Time, Reason, Gender " +
+                "from Student_Log, Student_Info where Student_Info.Student_ID=Student_Log.Stu_ID order by Reason";
+        LogEntity logEntity;
+        List<LogEntity> logs = new ArrayList<>();
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            ResultSet rs=preparedStatement.executeQuery();
+            while(rs.next()){
+                logEntity = new LogEntity(rs.getString(1),rs.getDate(2),rs.getString(3), rs.getString(4));
+                logs.add(logEntity);
+            }
+            return logs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        selectLogGender();
+    }
 }

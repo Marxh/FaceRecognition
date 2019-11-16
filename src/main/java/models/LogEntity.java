@@ -14,6 +14,7 @@ public class LogEntity {
     private String studentID;
     private Date visitTime;
     private String reason;
+    private String studentGender;
 
     public LogEntity(){}
 
@@ -21,6 +22,13 @@ public class LogEntity {
         this.studentID = studentID;
         this.visitTime = visitTime;
         this.reason = reason;
+    }
+
+    public LogEntity(String studentID, Date visitTime, String reason, String gender) {
+        this.studentID = studentID;
+        this.visitTime = visitTime;
+        this.reason = reason;
+        this.studentGender = gender;
     }
 
     public LogEntity(String studentID, String reason) {
@@ -50,4 +58,15 @@ public class LogEntity {
         this.reason = reason;
     }
 
+    public void setVisitTime(Date visitTime) {
+        this.visitTime = visitTime;
+    }
+
+    public String getStudentGender() {
+        return studentGender;
+    }
+
+    public void setStudentGender(String studentGender) {
+        this.studentGender = studentGender;
+    }
 }

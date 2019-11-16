@@ -1,7 +1,7 @@
 package controller;
 
 import database.DAO;
-import database.PieChartService;
+import database.ChartService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
@@ -26,7 +26,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CapturePageController {
 
@@ -83,7 +82,7 @@ public class CapturePageController {
 
     private ArrayList<RecognizedFace> results = new ArrayList<>();
 
-    private PieChartService pieChartService = new PieChartService();
+    private ChartService chartService = new ChartService();
 
     public void init() throws FileNotFoundException {
         updateButton.setDisable(true);
@@ -209,7 +208,7 @@ public class CapturePageController {
     }
 
     private void changePieChart(){
-        ObservableList<PieChart.Data> dataSet = pieChartService.getPieChartData(currentFaceID);
+        ObservableList<PieChart.Data> dataSet = chartService.getPieChartDataByStudentID(currentFaceID);
         pieChart.setData(FXCollections.observableArrayList(dataSet));
     }
 }

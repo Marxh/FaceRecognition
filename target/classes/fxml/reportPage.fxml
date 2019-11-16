@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="661.0" prefWidth="931.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReportController">
+   <children>
+      <Line endX="824.0" layoutX="101.0" layoutY="84.0" opacity="0.3" startX="-100.0" />
+      <ImageView disable="true" fitHeight="661.0" fitWidth="924.0" layoutX="-7.0" layoutY="7.0" opacity="0.2" pickOnBounds="true">
+         <image>
+            <Image url="@../images/rainbow.png" />
+         </image>
+      </ImageView>
+      <PieChart fx:id="reasonAttendancePie" layoutX="36.0" layoutY="115.0" prefHeight="252.0" prefWidth="870.0" />
+      <Label layoutX="36.0" layoutY="22.0" prefHeight="42.0" prefWidth="106.0" text="Report">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Label>
+      <BarChart fx:id="reasonAttendanceBar" animated="false" layoutX="9.0" layoutY="369.0" prefHeight="278.0" prefWidth="909.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+   </children>
+</Pane>

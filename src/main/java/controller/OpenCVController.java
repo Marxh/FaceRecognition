@@ -49,8 +49,6 @@ public class OpenCVController {
     @FXML
     public Button homepage;
     @FXML
-    public Button logButton;
-    @FXML
     public Button reportButton;
     @FXML
     public Hyperlink urlOpenCV;
