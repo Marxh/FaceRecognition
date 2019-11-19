@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart.*;
+import view.ErrorView;
 
 import java.util.Date;
 
@@ -23,9 +24,10 @@ public class ReportController {
     @FXML
     private PieChart reasonAttendancePie;
 
-
     @FXML
     private BarChart reasonAttendanceBar;
+
+    private ErrorView errorView = new ErrorView();
 
     private ChartService chartService = new ChartService();
 
@@ -48,7 +50,11 @@ public class ReportController {
     }
 
     private void initBarChart(Date startDate, Date endDate){
-        Series[] genderSeries = chartService.getBarChartSeries(startDate, endDate);
-        reasonAttendanceBar.getData().addAll(genderSeries[0], genderSeries[1]);
+        try{
+            Series[] genderSeries = chartService.getBarChartSeries(startDate, endDate);
+            reasonAttendanceBar.getData().addAll(genderSeries[0], genderSeries[1]);
+        }catch (ArrayIndexOutOfBoundsException ex){
+            errorView.start("Selected date has no data.");
+        }
     }
 }

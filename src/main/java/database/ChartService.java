@@ -51,7 +51,7 @@ public class ChartService {
         return reasonFrequencyData;
     }
 
-    public Series[] getBarChartSeries(Date startDate, Date endDate){
+    public Series[] getBarChartSeries(Date startDate, Date endDate) throws ArrayIndexOutOfBoundsException{
         Series resultMale = new Series();
         Series resultFemale = new Series();
         List<LogEntity> logs = DAO.selectLogGender();
@@ -61,6 +61,7 @@ public class ChartService {
                 betweenTimeLogs.add(log);
             }
         }
+        if(betweenTimeLogs.size() == 0) throw new ArrayIndexOutOfBoundsException();
         String currentReason = betweenTimeLogs.get(0).getReason();
         int maleCount = 0;
         int femaleCount = 0;
