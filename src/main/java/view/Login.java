@@ -20,7 +20,7 @@ public class Login extends Application {
         this.primaryStage = primaryStage;
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/login.fxml"));
             Pane root = (Pane) loader.load();
             root.setStyle("-fx-background-color: transparent;");
 

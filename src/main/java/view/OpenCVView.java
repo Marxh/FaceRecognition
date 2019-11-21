@@ -25,7 +25,7 @@ public class OpenCVView {
 		Stage primaryStage = new Stage();
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/OpenCV.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/openCV.fxml"));
 			BorderPane root = (BorderPane) loader.load();
 			// set a whitesmoke background
 			root.setStyle("-fx-background-color: whitesmoke;");

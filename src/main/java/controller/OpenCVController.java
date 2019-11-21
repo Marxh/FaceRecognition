@@ -2,17 +2,15 @@ package controller;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import opencv.FaceDetector;
-import opencv.RecognizedFace;
+import models.FaceDetector;
+import models.RecognizedFace;
 import org.opencv.core.*;
 import org.opencv.core.Point;
 import org.opencv.imgcodecs.Imgcodecs;
@@ -50,8 +48,6 @@ public class OpenCVController {
     private ImageView originalFrame;
     @FXML
     public Button homepage;
-    @FXML
-    public Button logButton;
     @FXML
     public Button reportButton;
     @FXML
@@ -152,8 +148,8 @@ public class OpenCVController {
 
     @FXML
     public void goHome(ActionEvent actionEvent) {
-        HomePage home = new HomePage();
-        home.start(new Stage());
+//        HomePage home = new HomePage();
+//        home.start(new Stage());
 
         Stage stage = (Stage) homepage.getScene().getWindow();
         stage.close();

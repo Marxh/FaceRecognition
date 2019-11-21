@@ -27,7 +27,7 @@ public class SettingPageController {
     public boolean lbpSelected = false;
 
     public void init(){
-        this.threshold.setText("3000");
+        this.threshold.setText("200");
     }
 
     @FXML
