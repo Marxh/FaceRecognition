@@ -220,28 +220,15 @@ public class DAO {
 
     /**
      * Select announcement
-     *
      * @return announcement information by random
      */
-    public static List<String> selectAnnouncement() {
-        String sql = "select announcement from Announcement";
-        List<String> annList_Temp = new ArrayList<>();
-        List<String> annList = new ArrayList<>();
-        Random random = new Random();
+    public static String selectAnnouncement(){
+        String sql = "select announcement from Announcement ORDER BY RAND() LIMIT 1";
         try {
             preparedStatement = conn.prepareStatement(sql);
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                annList_Temp.add(rs.getString(1));
-            }
-            while (annList.size() < 2) {
-                int index = random.nextInt(annList_Temp.size());
-                if (!annList.contains(annList_Temp.get(index))) {
-                    annList.add(annList_Temp.get(index));
-                    System.out.println(annList_Temp.get(index));
-                }
-            }
-            return annList;
+            ResultSet rs=preparedStatement.executeQuery();
+            rs.next();
+            return rs.getString(1);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -250,39 +237,18 @@ public class DAO {
 
     /**
      * Select warnings
-     *
      * @return warning by random
      */
-    public static List<String> selectWarnings() {
-        String sql = "select warnings from Warnings";
-        List<String> warList_Temp = new ArrayList<>();
-        List<String> warList = new ArrayList<>();
-        Random random = new Random();
+    public static String selectWarnings(){
+        String sql = "select warnings from Warnings ORDER BY RAND() LIMIT 1";
         try {
             preparedStatement = conn.prepareStatement(sql);
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                warList_Temp.add(rs.getString(1));
-            }
-            while (warList.size() < 2) {
-                int index = random.nextInt(warList_Temp.size());
-                if (!warList.contains(warList_Temp.get(index))) {
-                    warList.add(warList_Temp.get(index));
-                    System.out.println(warList_Temp.get(index));
-                }
-            }
-            return warList;
+            ResultSet rs=preparedStatement.executeQuery();
+            rs.next();
+            return rs.getString(1);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
-    }
-
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        selectAnnouncement();
-        selectWarnings();
     }
 }

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
@@ -14,336 +22,408 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="957.0" prefWidth="859.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CapturePageController">
-   <children>
-      <ImageView disable="true" fitHeight="957.0" fitWidth="861.0" layoutX="-1.0" opacity="0.2" pickOnBounds="true">
-         <image>
-            <Image url="@../images/rainbow.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="14.0" layoutY="6.0" prefHeight="15.0" prefWidth="84.0" text="OVERVIEW" textFill="#9d93b5">
-         <font>
-            <Font name="Arial Bold" size="9.0" />
-         </font>
-      </Label>
-      <Label layoutX="14.0" layoutY="25.0" prefHeight="28.0" prefWidth="109.0" text="Dashboard">
-         <font>
-            <Font name="Arial Bold" size="18.0" />
-         </font>
-      </Label>
-      <Line endX="719.0" layoutX="115.0" layoutY="60.0" startX="-100.0" strokeWidth="0.1" />
-      <Pane focusTraversable="true" layoutX="14.0" layoutY="78.0" prefHeight="99.0" prefWidth="167.0" style="-fx-border-color: #323232; -fx-border-radius: 0.5em;">
+<ScrollPane prefHeight="957.0" prefWidth="859.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CapturePageController">
+   <content>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="957.0" prefWidth="859.0">
          <children>
-            <Label layoutX="22.0" layoutY="14.0" text="Total Detected" textFill="#9d93b5">
-               <font>
-                  <Font name="Arial Bold" size="9.0" />
-               </font>
-            </Label>
-            <Label fx:id="totalDetected" layoutX="22.0" layoutY="45.0" text="0">
-               <font>
-                  <Font name="Arial Bold" size="24.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="42.0" fitWidth="47.0" layoutX="106.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView disable="true" fitHeight="861.0" fitWidth="861.0" layoutX="-1.0" opacity="0.2" pickOnBounds="true">
                <image>
-                  <Image url="@../images/cube.png" />
+                  <Image url="@../images/rainbow.png" />
                </image>
             </ImageView>
-         </children>
-      </Pane>
-      <Pane focusTraversable="true" layoutX="190.0" layoutY="78.0" prefHeight="99.0" prefWidth="167.0" style="-fx-border-color: #323232; -fx-border-radius: 0.5em;">
-         <children>
-            <Label layoutX="22.0" layoutY="14.0" text="Recognized" textFill="#9d93b5">
-               <font>
-                  <Font name="Arial Bold" size="9.0" />
-               </font>
-            </Label>
-            <Label fx:id="totalRecognized" layoutX="22.0" layoutY="45.0" text="0">
-               <font>
-                  <Font name="Arial Bold" size="24.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="36.0" fitWidth="42.0" layoutX="109.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/smile.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <Pane focusTraversable="true" layoutX="366.0" layoutY="78.0" prefHeight="99.0" prefWidth="167.0" style="-fx-border-color: #323232; -fx-border-radius: 0.5em;">
-         <children>
-            <Label layoutX="22.0" layoutY="14.0" text="Unrecognized" textFill="#9d93b5">
-               <font>
-                  <Font name="Arial Bold" size="9.0" />
-               </font>
-            </Label>
-            <Label fx:id="totalUnRecognized" layoutX="22.0" layoutY="45.0" text="0">
-               <font>
-                  <Font name="Arial Bold" size="24.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="42.0" fitWidth="42.0" layoutX="111.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/cry.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <Pane layoutX="14.0" layoutY="189.0" prefHeight="366.0" prefWidth="520.0" style="-fx-border-color: #323232;">
-         <children>
-            <Line endX="418.0" layoutX="101.0" layoutY="46.0" startX="-100.0" />
-            <Label contentDisplay="RIGHT" layoutX="22.0" layoutY="14.0" text="Face Recognition">
-               <font>
-                  <Font name="Arial Bold" size="13.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="25.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/faceRecognition.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Label>
-            <ImageView fx:id="photoDetected" fitHeight="318.0" fitWidth="518.0" layoutX="1.0" layoutY="47.0" pickOnBounds="true">
-            </ImageView>
-         </children>
-      </Pane>
-      <Pane layoutX="707.0" layoutY="78.0" prefHeight="99.0" prefWidth="126.0" style="-fx-border-color: #323232;">
-         <children>
-            <ImageView fx:id="croppedPhoto" fitHeight="97.0" fitWidth="124.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true">
-            </ImageView>
-         </children>
-      </Pane>
-      <ComboBox fx:id="namesCombo" layoutX="544.0" layoutY="78.0" onAction="#comboAction" prefWidth="150.0" promptText="Name" style="-fx-border-color: #323232; -fx-background-color: #FFFFFF; -fx-border-radius: 0.5em;" />
-      <Pane layoutX="544.0" layoutY="189.0" prefHeight="366.0" prefWidth="291.0" style="-fx-border-color: #323232;">
-         <children>
-            <Line endX="189.0" layoutX="101.0" layoutY="46.0" startX="-100.0" />
-            <Label contentDisplay="RIGHT" layoutX="22.0" layoutY="14.0" text="Personal Information">
-               <font>
-                  <Font name="Arial Bold" size="13.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="28.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/personalinfo.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Label>
-            <VBox layoutX="22.0" layoutY="57.0" prefHeight="198.0" prefWidth="254.0">
+            <VBox layoutX="14.0" layoutY="6.0">
                <children>
-                  <HBox prefHeight="25.0" prefWidth="254.0">
+                  <VBox layoutX="14.0" layoutY="6.0">
                      <children>
-                        <Label prefHeight="27.0" prefWidth="60.0" text="Name" />
-                        <TextField fx:id="nameField" promptText="Name" style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" HBox.hgrow="ALWAYS" />
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="5.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox prefHeight="25.0" prefWidth="254.0">
-                     <children>
-                        <Label prefHeight="27.0" prefWidth="60.0" text="Sex" />
-                        <TextField fx:id="sexField" promptText="Male / Female" style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" HBox.hgrow="ALWAYS" />
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="5.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox prefHeight="25.0" prefWidth="254.0">
-                     <children>
-                        <Label prefHeight="27.0" prefWidth="60.0" text="ID">
-                           <HBox.margin>
-                              <Insets bottom="5.0" />
-                           </HBox.margin>
+                        <Label layoutX="14.0" layoutY="6.0" prefHeight="15.0" prefWidth="84.0" text="OVERVIEW" textFill="#9d93b5">
+                           <font>
+                              <Font name="Arial Bold" size="9.0" />
+                           </font>
                         </Label>
-                        <TextField fx:id="idField" promptText="Identification Number" style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" HBox.hgrow="ALWAYS" />
+                        <Label layoutX="14.0" layoutY="25.0" prefHeight="28.0" prefWidth="109.0" text="Dashboard">
+                           <font>
+                              <Font name="Arial Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <HBox layoutX="15.0" layoutY="63.0">
+                     <children>
+                        <Pane focusTraversable="true" layoutX="15.0" layoutY="63.0" prefHeight="99.0" prefWidth="167.0" style="-fx-border-color: #323232; -fx-border-radius: 0.5em;">
+                           <children>
+                              <Label layoutX="22.0" layoutY="14.0" text="Total Detected" textFill="#9d93b5">
+                                 <font>
+                                    <Font name="Arial Bold" size="9.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="totalDetected" layoutX="22.0" layoutY="45.0" text="0">
+                                 <font>
+                                    <Font name="Arial Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="42.0" fitWidth="47.0" layoutX="106.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/cube.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Pane>
+                        <Pane focusTraversable="true" layoutX="191.0" layoutY="63.0" prefHeight="99.0" prefWidth="167.0" style="-fx-border-color: #323232; -fx-border-radius: 0.5em;">
+                           <children>
+                              <Label layoutX="22.0" layoutY="14.0" text="Recognized" textFill="#9d93b5">
+                                 <font>
+                                    <Font name="Arial Bold" size="9.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="totalRecognized" layoutX="22.0" layoutY="45.0" text="0">
+                                 <font>
+                                    <Font name="Arial Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="36.0" fitWidth="42.0" layoutX="109.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/smile.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </Pane>
+                        <Pane focusTraversable="true" layoutX="367.0" layoutY="63.0" prefHeight="99.0" prefWidth="167.0" style="-fx-border-color: #323232; -fx-border-radius: 0.5em;">
+                           <children>
+                              <Label layoutX="22.0" layoutY="14.0" text="Unrecognized" textFill="#9d93b5">
+                                 <font>
+                                    <Font name="Arial Bold" size="9.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="totalUnRecognized" layoutX="22.0" layoutY="45.0" text="0">
+                                 <font>
+                                    <Font name="Arial Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="42.0" fitWidth="42.0" layoutX="111.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/cry.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="7.0" />
+                           </HBox.margin>
+                        </Pane>
+                        <VBox layoutX="544.0" layoutY="66.0">
+                           <children>
+                              <ComboBox fx:id="namesCombo" layoutX="544.0" layoutY="66.0" onAction="#comboAction" prefWidth="150.0" promptText="Name" style="-fx-border-color: #323232; -fx-background-color: #FFFFFF; -fx-border-radius: 0.5em;" />
+                              <Pane layoutX="544.0" layoutY="95.0" prefHeight="65.0" prefWidth="150.0" style="-fx-border-color: #323232; -fx-border-radius: 0.5em;">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="14.0" text="Similarity" textFill="#9d93b5">
+                                       <font>
+                                          <Font name="Arial Bold" size="9.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="returnedSimilarity" layoutX="14.0" layoutY="25.0" text="0.00%">
+                                       <font>
+                                          <Font name="Arial Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="36.0" fitWidth="48.0" layoutX="100.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/similarity.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets right="5.0" />
+                                 </VBox.margin>
+                              </Pane>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <Pane layoutX="707.0" layoutY="78.0" prefHeight="83.0" prefWidth="126.0" style="-fx-border-color: #323232;">
+                           <children>
+                              <ImageView fx:id="croppedPhoto" fitHeight="101.0" fitWidth="124.0" layoutX="1.0" layoutY="1.0" pickOnBounds="true">
+            </ImageView>
+                           </children>
+                        </Pane>
                      </children>
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox prefHeight="25.0" prefWidth="254.0">
+                  <HBox layoutX="14.0" layoutY="168.0">
                      <children>
-                        <Label prefHeight="27.0" prefWidth="60.0" text="Program">
+                        <Pane layoutX="14.0" layoutY="168.0" prefHeight="304.0" prefWidth="520.0" style="-fx-border-color: #323232;">
+                           <children>
+                              <Line endX="418.0" layoutX="101.0" layoutY="46.0" startX="-100.0" />
+                              <Label contentDisplay="RIGHT" layoutX="22.0" layoutY="14.0" text="Face Recognition">
+                                 <font>
+                                    <Font name="Arial Bold" size="13.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/faceRecognition.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <ImageView fx:id="photoDetected" fitHeight="257.0" fitWidth="518.0" layoutX="1.0" layoutY="47.0" pickOnBounds="true">
+            </ImageView>
+                           </children>
                            <HBox.margin>
-                              <Insets bottom="5.0" />
+                              <Insets right="5.0" />
                            </HBox.margin>
-                        </Label>
-                        <TextField fx:id="programField" promptText="......" style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" HBox.hgrow="ALWAYS" />
+                        </Pane>
+                        <Pane layoutX="544.0" layoutY="168.0" prefHeight="304.0" prefWidth="291.0" style="-fx-border-color: #323232;">
+                           <children>
+                              <Line endX="189.0" layoutX="101.0" layoutY="46.0" startX="-100.0" />
+                              <Label contentDisplay="RIGHT" layoutX="22.0" layoutY="14.0" text="Personal Information">
+                                 <font>
+                                    <Font name="Arial Bold" size="13.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="28.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/personalinfo.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <VBox layoutX="22.0" layoutY="57.0" prefHeight="198.0" prefWidth="254.0">
+                                 <children>
+                                    <HBox prefHeight="25.0" prefWidth="254.0">
+                                       <children>
+                                          <Label prefHeight="27.0" prefWidth="60.0" text="Name" />
+                                          <TextField fx:id="nameField" promptText="Name" style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="25.0" prefWidth="254.0">
+                                       <children>
+                                          <Label prefHeight="27.0" prefWidth="60.0" text="Sex" />
+                                          <TextField fx:id="sexField" promptText="Male / Female" style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="25.0" prefWidth="254.0">
+                                       <children>
+                                          <Label prefHeight="27.0" prefWidth="60.0" text="ID">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <TextField fx:id="idField" promptText="Identification Number" style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="25.0" prefWidth="254.0">
+                                       <children>
+                                          <Label prefHeight="27.0" prefWidth="60.0" text="Program">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <TextField fx:id="programField" promptText="......" style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="25.0" prefWidth="254.0">
+                                       <children>
+                                          <Label prefHeight="27.0" prefWidth="60.0" text="Country">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <TextField fx:id="countryField" promptText="Home Country" style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="25.0" prefWidth="254.0">
+                                       <children>
+                                          <Label prefHeight="27.0" prefWidth="60.0" text="Age">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <TextField fx:id="ageField" promptText="Age" style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="25.0" prefWidth="254.0">
+                                       <children>
+                                          <Label prefHeight="27.0" prefWidth="60.0" text="Remark">
+                                             <HBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <TextField fx:id="remarkField" promptText="......" style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <Button fx:id="updateButton" layoutX="216.0" layoutY="316.0" mnemonicParsing="false" onAction="#doUpdate" style="-fx-background-color: #6638F0;" text="Update" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial" size="13.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="emotionButton" layoutX="22.0" layoutY="270.0" mnemonicParsing="false" onAction="#doEmotionAnalysis" style="-fx-background-color: #6638F0;" text="Emotion Analysis" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial" size="13.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </Pane>
                      </children>
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox prefHeight="25.0" prefWidth="254.0">
+                  <HBox layoutX="14.0" layoutY="479.0">
                      <children>
-                        <Label prefHeight="27.0" prefWidth="60.0" text="Country">
+                        <VBox layoutX="14.0" layoutY="479.0">
+                           <children>
+                              <Pane layoutX="14.0" layoutY="479.0" prefHeight="243.0" prefWidth="520.0" style="-fx-border-color: #323232;">
+                                 <children>
+                                    <Line endX="418.0" layoutX="101.0" layoutY="46.0" startX="-100.0" />
+                                    <Label contentDisplay="RIGHT" layoutX="22.0" layoutY="14.0" text="Chart Analysis">
+                                       <font>
+                                          <Font name="Arial Bold" size="13.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="25.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/chartIcon.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Label>
+                                    <PieChart fx:id="pieChart" layoutY="46.0" prefHeight="196.0" prefWidth="518.0" />
+                                    <Label layoutX="167.0" layoutY="15.0" prefHeight="23.0" prefWidth="162.0" text="Total attendance:">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="totalNumber" layoutX="315.0" layoutY="15.0" prefHeight="23.0" prefWidth="41.0">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Pane>
+                              <HBox layoutX="15.0" layoutY="729.0">
+                                 <children>
+                                    <Pane layoutX="15.0" layoutY="729.0" prefHeight="132.0" prefWidth="254.0" style="-fx-border-color: #323232;">
+                                       <children>
+                                          <Line endX="152.0" layoutX="101.0" layoutY="46.0" startX="-100.0" />
+                                          <Label contentDisplay="RIGHT" layoutX="22.0" layoutY="14.0" text="Announcement">
+                                             <font>
+                                                <Font name="Arial Bold" size="13.0" />
+                                             </font>
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../images/anc.jpg" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Label>
+                                          <Label fx:id="anc1" layoutX="14.0" layoutY="52.0" prefHeight="36.0" prefWidth="222.0" textFill="RED" wrapText="true" />
+                                          <Label fx:id="anc2" layoutX="14.0" layoutY="90.0" prefHeight="36.0" prefWidth="222.0" textFill="RED" wrapText="true" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="12.0" />
+                                       </HBox.margin>
+                                    </Pane>
+                                    <Pane layoutX="280.0" layoutY="729.0" prefHeight="132.0" prefWidth="254.0" style="-fx-border-color: #323232;">
+                                       <children>
+                                          <Line endX="152.0" layoutX="101.0" layoutY="46.0" startX="-100.0" />
+                                          <Label contentDisplay="RIGHT" layoutX="22.0" layoutY="14.0" text="Warning">
+                                             <font>
+                                                <Font name="Arial Bold" size="13.0" />
+                                             </font>
+                                             <graphic>
+                                                <ImageView fitHeight="25.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../images/warning.jpg" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Label>
+                                          <Label fx:id="warning1" layoutX="14.0" layoutY="50.0" prefHeight="36.0" prefWidth="222.0" textFill="RED" wrapText="true" />
+                                          <Label fx:id="warning2" layoutX="14.0" layoutY="90.0" prefHeight="36.0" prefWidth="222.0" textFill="RED" wrapText="true" />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </HBox>
+                           </children>
                            <HBox.margin>
-                              <Insets bottom="5.0" />
+                              <Insets right="5.0" />
                            </HBox.margin>
-                        </Label>
-                        <TextField fx:id="countryField" promptText="Home Country" style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" HBox.hgrow="ALWAYS" />
+                        </VBox>
+                        <Pane layoutX="544.0" layoutY="479.0" prefHeight="382.0" prefWidth="291.0" style="-fx-border-color: #323232;">
+                           <children>
+                              <Line endX="189.0" layoutX="101.0" layoutY="46.0" startX="-100.0" />
+                              <Label contentDisplay="RIGHT" layoutX="22.0" layoutY="14.0" text="Visit History">
+                                 <font>
+                                    <Font name="Arial Bold" size="13.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="28.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/history.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label layoutX="22.0" layoutY="66.0" prefHeight="27.0" prefWidth="60.0" text="Last time" />
+                              <Label layoutX="22.0" layoutY="105.0" prefHeight="27.0" prefWidth="60.0" text="Reason" />
+                              <TextField fx:id="historyTimeField" layoutX="82.0" layoutY="65.0" prefHeight="29.0" prefWidth="194.0" promptText="dd-MM-yyyy HH:mm:ss" style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" />
+                              <TextField fx:id="historyReason" layoutX="82.0" layoutY="104.0" prefHeight="29.0" prefWidth="194.0" promptText="......" style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" />
+                              <Line endX="189.0" layoutX="101.0" layoutY="178.0" startX="-100.0" />
+                              <Label layoutX="22.0" layoutY="206.0" prefHeight="27.0" prefWidth="84.0" text="Visiting reason" />
+                              <TextField fx:id="visitingReason" layoutX="22.0" layoutY="261.0" prefHeight="29.0" prefWidth="194.0" promptText="......." style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" />
+                              <Button fx:id="enterButton" layoutX="225.0" layoutY="331.0" mnemonicParsing="false" onAction="#doEnter" prefHeight="26.0" prefWidth="51.0" style="-fx-background-color: #6638F0;" text="Enter" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial" size="13.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </Pane>
                      </children>
                      <VBox.margin>
-                        <Insets bottom="5.0" />
+                        <Insets />
                      </VBox.margin>
-                  </HBox>
-                  <HBox prefHeight="25.0" prefWidth="254.0">
-                     <children>
-                        <Label prefHeight="27.0" prefWidth="60.0" text="Age">
-                           <HBox.margin>
-                              <Insets bottom="5.0" />
-                           </HBox.margin>
-                        </Label>
-                        <TextField fx:id="ageField" promptText="Age" style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" HBox.hgrow="ALWAYS" />
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="5.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox prefHeight="25.0" prefWidth="254.0">
-                     <children>
-                        <Label prefHeight="27.0" prefWidth="60.0" text="Remark">
-                           <HBox.margin>
-                              <Insets bottom="5.0" />
-                           </HBox.margin>
-                        </Label>
-                        <TextField fx:id="remarkField" promptText="......" style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" HBox.hgrow="ALWAYS" />
-                     </children>
                   </HBox>
                </children>
             </VBox>
-            <Button fx:id="updateButton" layoutX="216.0" layoutY="316.0" mnemonicParsing="false" onAction="#doUpdate" style="-fx-background-color: #6638F0;" text="Update" textFill="WHITE">
-               <font>
-                  <Font name="Arial" size="13.0" />
-               </font>
-            </Button>
-            <Button fx:id="emotionButton" layoutX="22.0" layoutY="316.0" mnemonicParsing="false" onAction="#doEmotionAnalysis" style="-fx-background-color: #6638F0;" text="Emotion Analysis" textFill="WHITE">
-               <font>
-                  <Font name="Arial" size="13.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
-      <Pane layoutX="544.0" layoutY="112.0" prefHeight="65.0" prefWidth="150.0" style="-fx-border-color: #323232; -fx-border-radius: 0.5em;">
-         <children>
-            <Label layoutX="14.0" layoutY="14.0" text="Similarity" textFill="#9d93b5">
-               <font>
-                  <Font name="Arial Bold" size="9.0" />
-               </font>
-            </Label>
-            <Label fx:id="returnedSimilarity" layoutX="14.0" layoutY="25.0" text="0.00%">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="36.0" fitWidth="48.0" layoutX="100.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/similarity.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <Button fx:id="exit" layoutX="787.0" layoutY="26.0" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="48.0" style="-fx-background-color: #6638F0;" text="Exit" textFill="WHITE">
-         <font>
-            <Font name="Arial" size="13.0" />
-         </font>
-      </Button>
-      <Pane layoutX="544.0" layoutY="565.0" prefHeight="382.0" prefWidth="291.0" style="-fx-border-color: #323232;">
-         <children>
-            <Line endX="189.0" layoutX="101.0" layoutY="46.0" startX="-100.0" />
-            <Label contentDisplay="RIGHT" layoutX="22.0" layoutY="14.0" text="Visit History">
-               <font>
-                  <Font name="Arial Bold" size="13.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="28.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/history.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Label>
-            <Label layoutX="22.0" layoutY="66.0" prefHeight="27.0" prefWidth="60.0" text="Last time" />
-            <Label layoutX="22.0" layoutY="105.0" prefHeight="27.0" prefWidth="60.0" text="Reason" />
-            <TextField fx:id="historyTimeField" layoutX="82.0" layoutY="65.0" prefHeight="29.0" prefWidth="194.0" promptText="dd-MM-yyyy HH:mm:ss" style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" />
-            <TextField fx:id="historyReason" layoutX="82.0" layoutY="104.0" prefHeight="29.0" prefWidth="194.0" promptText="......" style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" />
-            <Line endX="189.0" layoutX="101.0" layoutY="178.0" startX="-100.0" />
-            <Label layoutX="22.0" layoutY="206.0" prefHeight="27.0" prefWidth="84.0" text="Visiting reason" />
-            <TextField fx:id="visitingReason" layoutX="22.0" layoutY="261.0" prefHeight="29.0" prefWidth="194.0" promptText="......." style="-fx-background-color: #ffffff; -fx-border-color: #323232; -fx-border-radius: 0.1em;" />
-            <Button fx:id="enterButton" layoutX="225.0" layoutY="331.0" mnemonicParsing="false" onAction="#doEnter" prefHeight="26.0" prefWidth="51.0" style="-fx-background-color: #6638F0;" text="Enter" textFill="WHITE">
+            <Line endX="719.0" layoutX="115.0" layoutY="60.0" startX="-100.0" strokeWidth="0.1" />
+            <Button fx:id="exit" layoutX="787.0" layoutY="10.0" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="48.0" style="-fx-background-color: #6638F0;" text="Exit" textFill="WHITE">
                <font>
                   <Font name="Arial" size="13.0" />
                </font>
             </Button>
          </children>
       </Pane>
-      <Pane layoutX="14.0" layoutY="565.0" prefHeight="243.0" prefWidth="520.0" style="-fx-border-color: #323232;">
-         <children>
-            <Line endX="418.0" layoutX="101.0" layoutY="46.0" startX="-100.0" />
-            <Label contentDisplay="RIGHT" layoutX="22.0" layoutY="14.0" text="Chart Analysis">
-               <font>
-                  <Font name="Arial Bold" size="13.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="25.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/chartIcon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Label>
-            <PieChart fx:id="pieChart" layoutY="46.0" prefHeight="196.0" prefWidth="518.0" />
-            <Label layoutX="167.0" layoutY="15.0" prefHeight="23.0" prefWidth="162.0" text="Total attendance:">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label fx:id="totalNumber" layoutX="315.0" layoutY="15.0" prefHeight="23.0" prefWidth="41.0">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
-      <Pane layoutX="15.0" layoutY="815.0" prefHeight="132.0" prefWidth="254.0" style="-fx-border-color: #323232;">
-         <children>
-            <Line endX="152.0" layoutX="101.0" layoutY="46.0" startX="-100.0" />
-            <Label contentDisplay="RIGHT" layoutX="22.0" layoutY="14.0" text="Announcement">
-               <font>
-                  <Font name="Arial Bold" size="13.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="25.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/anc.jpg" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Label>
-            <Label fx:id="anc1" layoutX="14.0" layoutY="52.0" prefHeight="36.0" prefWidth="222.0" textFill="RED" wrapText="true" />
-            <Label fx:id="anc2" layoutX="14.0" layoutY="90.0" prefHeight="36.0" prefWidth="222.0" textFill="RED" wrapText="true" />
-         </children>
-      </Pane>
-      <Pane layoutX="280.0" layoutY="815.0" prefHeight="132.0" prefWidth="254.0" style="-fx-border-color: #323232;">
-         <children>
-            <Line endX="152.0" layoutX="101.0" layoutY="46.0" startX="-100.0" />
-            <Label contentDisplay="RIGHT" layoutX="22.0" layoutY="14.0" text="Warning">
-               <font>
-                  <Font name="Arial Bold" size="13.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="25.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/warning.jpg" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Label>
-            <Label fx:id="warning1" layoutX="14.0" layoutY="50.0" prefHeight="36.0" prefWidth="222.0" textFill="RED" wrapText="true" />
-            <Label fx:id="warning2" layoutX="14.0" layoutY="90.0" prefHeight="36.0" prefWidth="222.0" textFill="RED" wrapText="true" />
-         </children>
-      </Pane>
-   </children>
-</Pane>
+   </content>
+</ScrollPane>

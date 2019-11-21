@@ -3,6 +3,7 @@ package view;
 import controller.CapturePageController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -26,7 +27,7 @@ public class CapturePage {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/capturePage.fxml"));
-            Pane root = (Pane) loader.load();
+            ScrollPane root = (ScrollPane) loader.load();
             root.setStyle("-fx-background-color: whitesmoke;");
 
             Scene scene = new Scene(root);
@@ -35,8 +36,6 @@ public class CapturePage {
             primaryStage.setScene(scene);
 
             primaryStage.show();
-            CapturePageController controller = loader.getController();
-            controller.init();
 
         } catch (Exception e) {
             e.printStackTrace();

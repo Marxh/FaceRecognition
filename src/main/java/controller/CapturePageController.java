@@ -5,6 +5,7 @@ import database.ChartService;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import models.LogEntity;
 import models.StudentEntity;
@@ -26,17 +27,20 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author Group 6
+ * @version jdk 1.8
  * @date 2019-11-14
  * @description This is a class used to control the page which display the
  * specific information of the recognition results
- * @version jdk 1.8
  */
-public class CapturePageController {
+public class CapturePageController implements Initializable {
 
     /**
      * warnin1
@@ -226,31 +230,22 @@ public class CapturePageController {
      */
     private ChartService chartService = new ChartService();
 
-    /**
-     * @throws java.io.FileNotFoundException
-     * @description This is the initial method for the class. The methods
-     * control the information that would be displayed initially to the users
-     * when they open the Capture page
-     */
-    public void init() throws FileNotFoundException {
 
-        //set default values for each fields in the page
-
-        updateButton.setDisable(true);
-        emotionButton.setDisable(true);
-        enterButton.setDisable(true);
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         Context.controllers.put(this.getClass().getSimpleName(), this);
-
         //get the names that recognized by openCV project
-
         OpenCVController controller = (OpenCVController) Context.controllers.get(OpenCVController.class.getSimpleName());
+        InputStream inputStream = null;
         //get the images which belongs to the people that are captured
-
-        InputStream inputStream = new FileInputStream(new File("resources/temp/temp.png"));
+        try {
+            inputStream = new FileInputStream(new File("resources/temp/temp.png"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         Image image = new Image(inputStream);
         photoDetected.setImage(image);
         this.results = controller.results;
-
         /*
          * calculate the total count of the faces that have been recognized and
          * not been recognized and store the results of the names from openCV to
@@ -267,11 +262,8 @@ public class CapturePageController {
                 known++;
             }
         }
-
         // add the names to the ComboBox fields
-
         namesCombo.getItems().addAll(names);
-
         /*
          * @description This method is to control the changes of the pages after
          * the users finish the action of choosing the names in the ComboBox
@@ -282,20 +274,20 @@ public class CapturePageController {
             public void changed(ObservableValue observable, String oldValue, String newValue) {
                 try {
                     for (RecognizedFace face : results) {
+                        // show the person's image who was chosen by the user
                         if (face.getName().equals(newValue)) {
-                            // show the person's image who was chosen by the user
                             InputStream inputStream = new FileInputStream(new File(face.getFilePath()));
                             Image image = new Image(inputStream);
                             croppedPhoto.setImage(image);
-
                             //if the person chosen by the user is not recognized, call the errorView class to alert the user
                             if (newValue.equals("Unknown")) {
                                 clearPage();
                                 updateButton.setDisable(false);
+                                emotionButton.setDisable(false);
+                                enterButton.setDisable(true);
                                 errorView.start("The person wasn't recognized! You can enter the person's data.");
                                 break;
                             }
-
                             /*
                              * display the person's information including the
                              * person's name, gender, ID, country and program
@@ -306,6 +298,7 @@ public class CapturePageController {
                              * by the user doesn't have records in the database,
                              * the fields would display nothing
                              */
+                            updateButton.setDisable(true);
                             emotionButton.setDisable(false);
                             enterButton.setDisable(false);
                             StudentEntity stud = DAO.selectStudent(face.getId());
@@ -330,20 +323,13 @@ public class CapturePageController {
                 }
             }
         });
-
         //show the number of total recognized people and unrecognized people
-
         totalDetected.setText(String.valueOf(results.size()));
         totalUnRecognized.setText(String.valueOf(unknown));
         totalRecognized.setText(String.valueOf(known));
-
         //display the announcements and warnings
-        List<String> annList = DAO.selectAnnouncement();
-        List<String> warList = DAO.selectWarnings();
-        anc1.setText("1." + annList.get(0));
-        anc2.setText("2." + annList.get(1));
-        warning1.setText("1." + warList.get(0));
-        warning2.setText("2." + warList.get(1));
+        anc1.setText("1." + DAO.selectAnnouncement());
+        warning1.setText("1." + DAO.selectWarnings());
     }
 
     /**
@@ -434,17 +420,21 @@ public class CapturePageController {
      * @description This method is to draw the piechart of the person's
      * historical visiting reasons
      */
-    private void changePieChart() {
+    private void changePieChart(){
         ObservableList<PieChart.Data> dataSet = chartService.getPieChartDataByStudentID(currentFaceID);
-        totalNumber.setText(String.valueOf(dataSet.toArray().length));
+        AtomicReference<Double> totalNum = new AtomicReference<>(0.0);
+
         pieChart.setData(FXCollections.observableArrayList(dataSet));
-        dataSet.forEach(data
-                        -> data.nameProperty().bind(
-                Bindings.concat(
-                        data.getName(), ": ", data.pieValueProperty().asString("%.0f")
-                )
-                )
+        dataSet.forEach(data ->{
+                    data.nameProperty().bind(
+                            Bindings.concat(
+                                    data.getName(), ": ", data.pieValueProperty().asString("%.0f")
+                            )
+                    );
+                    totalNum.updateAndGet(v -> new Double((double) (v + data.pieValueProperty().doubleValue())));
+                }
         );
+        totalNumber.setText(totalNum.toString());
         pieChart.setLegendVisible(false);
     }
 
