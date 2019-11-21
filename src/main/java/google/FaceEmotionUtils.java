@@ -8,21 +8,40 @@ import com.google.cloud.vision.v1.*;
 import com.google.protobuf.ByteString;
 import models.FaceEmotion;
 
+/**
+ * This is a class implement Google Vision API.
+ *
+ * @author Xu Zheng
+ * @version jdk 1.8
+ * @date Created in 15/11/19 3:15 pm
+ * @description This is a class used to generate chart data from database.
+ */
 public class FaceEmotionUtils {
-    public static void main(String[] args) throws Exception{
-        //test
-        FaceEmotion face_1 = new FaceEmotion("Shanyue Wan", "resources/trainingset/grayscaletrain/1-xuzheng_8.png");
-        FaceEmotion face_2 = new FaceEmotion("Xinrui Zheng", "resources/trainingset/grayscaletrain/1-xuzheng_12.png");
-        ArrayList<FaceEmotion> faces = new ArrayList<>();
-        faces.add(face_1);
-        faces.add(face_2);
-        ArrayList<FaceEmotion> results = detectEmotion(faces);
-        for (FaceEmotion result : results){
-            System.out.println(result.getName()+" " + result.getFilepath()+"\n" +
-                    "Joy: "+result.getJoyLikelihood()+"\nSorrow: "+result.getSorrowLikelihood()+"\nAnger: "+result.getAngerLikelihood()+"\nSurprise: "+result.getSurpriseLikelihood()+"\n");
+
+    /**
+     *
+     * @param args args
+     */
+    public static void main(String[] args) {
+        String file = "resources/temp/test.png";
+        try {
+            FaceEmotion faceEmotion = detectEmotion(file);
+            System.out.println(faceEmotion.getJoyLikelihood());
+            System.out.println(faceEmotion.getSorrowLikelihood());
+            System.out.println(faceEmotion.getSurpriseLikelihood());
+            System.out.println(faceEmotion.getAngerLikelihood());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
+    /**
+     * Used to analyze emotions of the faces
+     *
+     * @param faces detected faces
+     * @return faces instance with emotions
+     * @throws Exception file no found exception
+     */
     public static ArrayList<FaceEmotion> detectEmotion(ArrayList<FaceEmotion> faces) throws Exception {
 
         ArrayList<AnnotateImageRequest> requests = new ArrayList<>();
@@ -59,6 +78,13 @@ public class FaceEmotionUtils {
         return faces;
     }
 
+    /**
+     * Used to detect emotions of the face
+     *
+     * @param filepath
+     * @return FaceEmotion instance of the detected emotions
+     * @throws Exception file no found exception
+     */
     public static FaceEmotion detectEmotion(String filepath) throws Exception {
         FaceEmotion face = new FaceEmotion();
         List<AnnotateImageRequest> requests = new ArrayList<>();
@@ -81,7 +107,7 @@ public class FaceEmotionUtils {
                     face.setSorrowLikelihood(null);
                     face.setAngerLikelihood(null);
                     face.setSurpriseLikelihood(null);
-                } else{
+                } else {
                     FaceAnnotation annotation = res.getFaceAnnotationsList().get(0);
                     face.setJoyLikelihood(String.valueOf(annotation.getJoyLikelihood()));
                     face.setSorrowLikelihood(String.valueOf(annotation.getSorrowLikelihood()));
@@ -89,6 +115,11 @@ public class FaceEmotionUtils {
                     face.setSurpriseLikelihood(String.valueOf(annotation.getSurpriseLikelihood()));
                 }
             }
+        } catch (IndexOutOfBoundsException ex) {
+            face.setJoyLikelihood("VERY_UNLIKELY");
+            face.setAngerLikelihood("VERY_UNLIKELY");
+            face.setSorrowLikelihood("VERY_UNLIKELY");
+            face.setSurpriseLikelihood("VERY_UNLIKELY");
         }
         return face;
     }

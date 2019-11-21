@@ -26,81 +26,170 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-
 /**
- * The controller associated with the only view of our application. The
- * application logic is implemented here. It handles the button for
- * starting/stopping the camera, the acquired video stream, the relative
- * controls and the face detection/tracking.
- *
- * @author Luigi De Russis / Igor @ HeroinSoul / Jim O'Connorhorrill @ cuerobotics
- * @version 1.3 (2016-08-04)
- * @since 1.0 (2014-01-10)
+ * @author Group 6
+ * @version jdk 1.8
+ * @date 2019-11-14
+ * @description This is a class used to control the page which opencv capture
+ * page
  */
 public class OpenCVController {
     // FXML buttons
+
+    /**
+     *
+     */
     @FXML
-    private Button cameraButton;
+    public Button cameraButton;
+
+    /**
+     *
+     */
     @FXML
     public Button captureButton;
     // the FXML area for showing the current frame
+
+    /**
+     *
+     */
     @FXML
     private ImageView originalFrame;
+
+    /**
+     *
+     */
     @FXML
     public Button homepage;
+
+    /**
+     *
+     */
     @FXML
     public Button reportButton;
+
+    /**
+     *
+     */
     @FXML
     public Hyperlink urlOpenCV;
+
+    /**
+     *
+     */
     @FXML
     public Hyperlink urlCMU;
+
+    /**
+     *
+     */
     @FXML
     public Hyperlink urlHelp;
+
+    /**
+     *
+     */
     @FXML
     public HBox captureHBox;
 
+    /**
+     *
+     */
     public ArrayList<RecognizedFace> results;
 
-    public double threshold;
+    /**
+     *
+     */
+    public static double threshold;
 
-    // a timer for acquiring the video stream
+    // video stream timer
+    /**
+     *
+     */
     private ScheduledExecutorService timer;
-    // the OpenCV object that performs the video capture
+    // VideoCapture object
+
+    /**
+     *
+     */
+    @FXML
     private VideoCapture capture;
     // a flag to change the button behavior
+
+    /**
+     *
+     */
     private boolean cameraActive;
 
+    /**
+     *
+     */
     private int absoluteFaceSize;
 
+    /**
+     *
+     */
     private FaceDetector faceDetector = new FaceDetector();
 
+    /**
+     *
+     */
     public int index = 0;
+
+    /**
+     *
+     */
     public int ind = 0;
 
     // New user Name for a training data
+    /**
+     *
+     */
     public String newname;
 
-    public OpenCVController(){
+    /**
+     *
+     */
+    public OpenCVController() {
         Context.controllers.put(this.getClass().getSimpleName(), this);
     }
 
+    /**
+     *
+     * @param actionEvent
+     */
     public void goLog(ActionEvent actionEvent) {
     }
 
+    /**
+     *
+     * @param actionEvent
+     */
     public void goReport(ActionEvent actionEvent) {
         FilterPage filterPage = new FilterPage();
         filterPage.start(new Stage());
     }
 
+    /**
+     *
+     * @param actionEvent
+     */
     public void goSetting(ActionEvent actionEvent) {
         SettingPage settingPage = new SettingPage();
         settingPage.start(new Stage());
     }
 
+    /**
+     *
+     * @param actionEvent
+     */
     public void doExit(ActionEvent actionEvent) {
         Platform.exit();
     }
 
+    /**
+     *
+     * @param actionEvent
+     */
     @FXML
     public void openUrlOpenCV(ActionEvent actionEvent) {
         if (Desktop.isDesktopSupported()) {
@@ -116,6 +205,10 @@ public class OpenCVController {
         }
     }
 
+    /**
+     *
+     * @param actionEvent
+     */
     @FXML
     public void openUrlCMU(ActionEvent actionEvent) {
         if (Desktop.isDesktopSupported()) {
@@ -131,6 +224,10 @@ public class OpenCVController {
         }
     }
 
+    /**
+     *
+     * @param actionEvent
+     */
     @FXML
     public void openUrlHelp(ActionEvent actionEvent) {
         if (Desktop.isDesktopSupported()) {
@@ -146,6 +243,10 @@ public class OpenCVController {
         }
     }
 
+    /**
+     *
+     * @param actionEvent
+     */
     @FXML
     public void goHome(ActionEvent actionEvent) {
 //        HomePage home = new HomePage();
@@ -155,10 +256,13 @@ public class OpenCVController {
         stage.close();
     }
 
+    /**
+     *
+     * @param actionEvent
+     */
     @FXML
     public void goCapture(ActionEvent actionEvent) {
         this.results = capture();
-
 
         CapturePage capturePage = new CapturePage();
         capturePage.start(new Stage());
@@ -170,10 +274,11 @@ public class OpenCVController {
     public void init() {
         this.capture = new VideoCapture();
         this.absoluteFaceSize = 0;
+        this.captureButton.setDisable(true);
+        this.cameraButton.setDisable(true);
 
         faceDetector.trainModel();
     }
-
 
     /**
      * The action triggered by pushing the button on the GUI
@@ -239,6 +344,10 @@ public class OpenCVController {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<RecognizedFace> capture() {
         ArrayList<RecognizedFace> list = new ArrayList<>();
         Mat frame = new Mat();
@@ -259,9 +368,15 @@ public class OpenCVController {
                 System.err.println("ERROR: " + e);
             }
         }
+        this.capture.release();
         return list;
     }
 
+    /**
+     *
+     * @param frame
+     * @return
+     */
     public ArrayList<RecognizedFace> detectAndStore(Mat frame) {
         MatOfRect faces = new MatOfRect();
         Mat grayFrame = new Mat();
@@ -307,7 +422,7 @@ public class OpenCVController {
 
         ArrayList<RecognizedFace> returnedResults = new ArrayList<>();
         try {
-            returnedResults = faceDetector.faceRecognition(facesToBeRec);
+            returnedResults = faceDetector.faceRecognitionAndStore(facesToBeRec);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -316,14 +431,13 @@ public class OpenCVController {
             RecognizedFace face = returnedResults.get(i);
             double confidence = face.getConfidence();
 
-            if (confidence < this.threshold) {
+            if (confidence > this.threshold) {
                 face.setName("Unknown");
             }
             System.out.println(threshold);
         }
         return returnedResults;
     }
-
 
     /**
      * Get a frame from the opened video stream (if any)
@@ -415,7 +529,7 @@ public class OpenCVController {
             RecognizedFace face = returnedResults.get(i);
             double confidence = face.getConfidence();
 
-            if (confidence < 0.7) {
+            if (confidence > threshold) {
                 face.setName("Unknown");
             }
             String name = face.getName();
@@ -431,7 +545,8 @@ public class OpenCVController {
     /**
      * Method for loading a classifier trained set from disk
      *
-     * @param classifierPath the path on disk where a classifier trained set is located
+     * @param classifierPath the path on disk where a classifier trained set is
+     * located
      */
     public void checkboxSelection(String classifierPath) {
         // load the classifier(s)
@@ -457,6 +572,10 @@ public class OpenCVController {
         return new Image(new ByteArrayInputStream(buffer.toArray()));
     }
 
+    /**
+     *
+     * @param threshold
+     */
     public void setThreshold(double threshold) {
         this.threshold = threshold;
     }

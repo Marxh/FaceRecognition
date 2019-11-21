@@ -2,6 +2,7 @@ package controller;
 
 import database.DAO;
 import database.ChartService;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
@@ -26,74 +27,235 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * @author Group 6
+ * @date 2019-11-14
+ * @description This is a class used to control the page which display the
+ * specific information of the recognition results
+ * @version jdk 1.8
+ */
 public class CapturePageController {
 
+    /**
+     * warnin1
+     */
+    @FXML
+    public Label warning1;
+
+    /**
+     * warning2
+     */
+    @FXML
+    public Label warning2;
+
+    /**
+     * announcement1
+     */
+    @FXML
+    public Label anc1;
+
+    /**
+     * announcement12
+     */
+    @FXML
+    public Label anc2;
+
+    /**
+     * save
+     */
     @FXML
     private Button save;
+
+    /**
+     * total detected
+     */
     @FXML
     private Label totalDetected;
+
+    /**
+     * total recognized
+     */
     @FXML
     private Label totalRecognized;
+
+    /**
+     * total unrecognized
+     */
     @FXML
     private Label totalUnRecognized;
+
+    /**
+     * photo detected
+     */
     @FXML
     private ImageView photoDetected;
+
+    /**
+     * cropped photo
+     */
     @FXML
     private ImageView croppedPhoto;
+
+    /**
+     * combo box
+     */
     @FXML
     public ComboBox namesCombo;
+
+    /**
+     * name
+     */
     @FXML
     private TextField nameField;
+
+    /**
+     * sex
+     */
     @FXML
     private TextField sexField;
+
+    /**
+     * id
+     */
     @FXML
     private TextField idField;
+
+    /**
+     * program
+     */
     @FXML
     private TextField programField;
+
+    /**
+     * country
+     */
     @FXML
     private TextField countryField;
+
+    /**
+     * age
+     */
     @FXML
     private TextField ageField;
+
+    /**
+     * remark
+     */
     @FXML
     private TextField remarkField;
+
+    /**
+     * update
+     */
     @FXML
     private Button updateButton;
+
+    /**
+     * emotion
+     */
     @FXML
     private Button emotionButton;
+
+    /**
+     * similarity
+     */
     @FXML
     private Label returnedSimilarity;
+
+    /**
+     * exit
+     */
     @FXML
     private Button exit;
+
+    /**
+     * history
+     */
     @FXML
     private TextField historyTimeField;
+
+    /**
+     * history reason
+     */
     @FXML
     private TextField historyReason;
+
+    /**
+     * visiting reason
+     */
     @FXML
     private TextField visitingReason;
+
+    /**
+     * enter
+     */
     @FXML
     private Button enterButton;
+
+    /**
+     * pie chart
+     */
     @FXML
     private PieChart pieChart;
 
+    /**
+     * total number
+     */
+    @FXML
+    private Label totalNumber;
+
+    /**
+     * id
+     */
     private String currentFaceID = "Unknown";
 
+    /**
+     * error view
+     */
     private ErrorView errorView = new ErrorView();
 
+    /**
+     * recognized face list
+     */
     private ArrayList<RecognizedFace> results = new ArrayList<>();
 
+    /**
+     * chart service
+     */
     private ChartService chartService = new ChartService();
 
+    /**
+     * @throws java.io.FileNotFoundException
+     * @description This is the initial method for the class. The methods
+     * control the information that would be displayed initially to the users
+     * when they open the Capture page
+     */
     public void init() throws FileNotFoundException {
+
+        //set default values for each fields in the page
+
         updateButton.setDisable(true);
         emotionButton.setDisable(true);
         enterButton.setDisable(true);
         Context.controllers.put(this.getClass().getSimpleName(), this);
+
+        //get the names that recognized by openCV project
+
         OpenCVController controller = (OpenCVController) Context.controllers.get(OpenCVController.class.getSimpleName());
+        //get the images which belongs to the people that are captured
+
         InputStream inputStream = new FileInputStream(new File("resources/temp/temp.png"));
         Image image = new Image(inputStream);
         photoDetected.setImage(image);
         this.results = controller.results;
+
+        /*
+         * calculate the total count of the faces that have been recognized and
+         * not been recognized and store the results of the names from openCV to
+         * name arrayList
+         */
         ArrayList<String> names = new ArrayList<>();
         int known = 0, unknown = 0;
         for (RecognizedFace face : results) {
@@ -105,16 +267,47 @@ public class CapturePageController {
                 known++;
             }
         }
+
+        // add the names to the ComboBox fields
+
         namesCombo.getItems().addAll(names);
+
+        /*
+         * @description This method is to control the changes of the pages after
+         * the users finish the action of choosing the names in the ComboBox
+         * @param ChangeListener change listener
+         */
         namesCombo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue observable, String oldValue, String newValue) {
-                try{
+                try {
                     for (RecognizedFace face : results) {
-                        if(face.getName().equals(newValue)){
+                        if (face.getName().equals(newValue)) {
+                            // show the person's image who was chosen by the user
                             InputStream inputStream = new FileInputStream(new File(face.getFilePath()));
                             Image image = new Image(inputStream);
                             croppedPhoto.setImage(image);
+
+                            //if the person chosen by the user is not recognized, call the errorView class to alert the user
+                            if (newValue.equals("Unknown")) {
+                                clearPage();
+                                updateButton.setDisable(false);
+                                errorView.start("The person wasn't recognized! You can enter the person's data.");
+                                break;
+                            }
+
+                            /*
+                             * display the person's information including the
+                             * person's name, gender, ID, country and program
+                             * from the database also display the person's last
+                             * visiting reason and last visiting time from the
+                             * Student_Log table in database and show the
+                             * person't confidence values if the person chosen
+                             * by the user doesn't have records in the database,
+                             * the fields would display nothing
+                             */
+                            emotionButton.setDisable(false);
+                            enterButton.setDisable(false);
                             StudentEntity stud = DAO.selectStudent(face.getId());
                             nameField.setText(stud.getStudentName());
                             sexField.setText(stud.getGender());
@@ -132,59 +325,80 @@ public class CapturePageController {
                             break;
                         }
                     }
-                    if(currentFaceID.equals("Unknown")) {
-                        updateButton.setDisable(false);
-                        enterButton.setDisable(true);
-                        emotionButton.setDisable(true);
-                    }else{
-                        updateButton.setDisable(true);
-                        enterButton.setDisable(false);
-                        emotionButton.setDisable(false);
-                    }
-                }catch (FileNotFoundException e){
+                } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
             }
         });
+
+        //show the number of total recognized people and unrecognized people
+
         totalDetected.setText(String.valueOf(results.size()));
         totalUnRecognized.setText(String.valueOf(unknown));
         totalRecognized.setText(String.valueOf(known));
+
+        //display the announcements and warnings
+        List<String> annList = DAO.selectAnnouncement();
+        List<String> warList = DAO.selectWarnings();
+        anc1.setText("1." + annList.get(0));
+        anc2.setText("2." + annList.get(1));
+        warning1.setText("1." + warList.get(0));
+        warning2.setText("2." + warList.get(1));
     }
 
+    /**
+     * combo action
+     */
     @FXML
     public void comboAction() {
     }
 
+    /**
+     * @description This method is to control the page jump into home page
+     */
     @FXML
     public void backToHome() {
         Stage stage = (Stage) save.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * save
+     */
     @FXML
     public void doSave() {
 
     }
 
+    /**
+     * @description This method is to update the person's information if the
+     * user enter some new data of the recognized person or insert the
+     * unrecognized person's information if the user enter data
+     */
     @FXML
     public void doUpdate() {
-        if(nameField.getText().equals("") | sexField.getText().equals("") | idField.getText().equals("")|
-                programField.getText().equals("") | countryField.getText().equals("")|
-                countryField.getText().equals("") | ageField.getText().equals("")|
-                remarkField.getText().equals("")){
+        if (nameField.getText().equals("") | sexField.getText().equals("") | idField.getText().equals("")
+                | programField.getText().equals("") | countryField.getText().equals("")
+                | countryField.getText().equals("") | ageField.getText().equals("")
+                | remarkField.getText().equals("")) {
             errorView.start("Input not complete.");
             return;
         }
         StudentEntity studentEntity = new StudentEntity(idField.getText(), nameField.getText(), Integer.parseInt(ageField.getText()),
                 programField.getText(), sexField.getText(), countryField.getText(), remarkField.getText());
         DAO.insertStudent(studentEntity);
+        enterButton.setDisable(false);
         currentFaceID = idField.getText();
         errorView.start("Insert Success.");
     }
 
+    /**
+     * @description This method is to update the person's Log records including
+     * the visiting reason
+     */
     @FXML
     public void doEnter() {
-        if(visitingReason.getText().equals("")){
+        if (visitingReason.getText().equals("")) {
             errorView.start("Input not complete.");
             return;
         }
@@ -192,23 +406,65 @@ public class CapturePageController {
         errorView.start("Log Insert Success.");
     }
 
+    /**
+     * @description This method is to control the page jump into home page
+     */
     @FXML
-    public void exit(){
+    public void exit() {
         Stage stage = (Stage) exit.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * @description This method is to jump into emotion analysis page
+     */
     public void doEmotionAnalysis() {
         EmotionPage emotionPage = new EmotionPage();
         emotionPage.start(new Stage());
     }
 
-    public ArrayList<RecognizedFace> getResults(){
+    /**
+     * @return @description This method is to get the recognition results
+     */
+    public ArrayList<RecognizedFace> getResults() {
         return results;
     }
 
-    private void changePieChart(){
+    /**
+     * @description This method is to draw the piechart of the person's
+     * historical visiting reasons
+     */
+    private void changePieChart() {
         ObservableList<PieChart.Data> dataSet = chartService.getPieChartDataByStudentID(currentFaceID);
+        totalNumber.setText(String.valueOf(dataSet.toArray().length));
         pieChart.setData(FXCollections.observableArrayList(dataSet));
+        dataSet.forEach(data
+                        -> data.nameProperty().bind(
+                Bindings.concat(
+                        data.getName(), ": ", data.pieValueProperty().asString("%.0f")
+                )
+                )
+        );
+        pieChart.setLegendVisible(false);
+    }
+
+    /**
+     * @description This method is to clear all the contents in the page
+     */
+    private void clearPage() {
+        nameField.setText("");
+        sexField.setText("");
+        idField.setText("");
+        countryField.setText("");
+        programField.setText("");
+        ageField.setText("");
+        remarkField.setText("");
+        emotionButton.setDisable(true);
+        enterButton.setDisable(true);
+        ObservableList<PieChart.Data> dataSet = FXCollections.observableArrayList();
+        historyTimeField.setText("");
+        totalNumber.setText("");
+        historyReason.setText("");
+        pieChart.setData(dataSet);
     }
 }

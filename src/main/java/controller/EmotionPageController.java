@@ -1,7 +1,6 @@
 package controller;
 
 import google.FaceEmotionUtils;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -21,29 +20,76 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
+/**
+ * @author Group 6
+ * @version jdk 1.8
+ * @date 2019-11-14
+ * @descriptio This is a class used to control the page which display the
+ * emotion detection result
+ */
 public class EmotionPageController {
 
+    /**
+     * croppedFace
+     */
     public ImageView croppedFace;
 
+    /**
+     * name
+     */
     public Label name;
+
+    /**
+     * expression
+     */
     public ImageView expression;
+
+    /**
+     * exit
+     */
     public Button exit;
 
+    /**
+     * recognized face list
+     */
     public ArrayList<RecognizedFace> results;
+
+    /**
+     * FaceEmotion
+     */
     public FaceEmotion faceEmotion;
 
+    /**
+     * joy
+     */
     private int joy = 1;
+
+    /**
+     * sorrow
+     */
     private int sorrow = 1;
+
+    /**
+     * anger
+     */
     private int anger = 1;
+
+    /**
+     * surprise
+     */
     private int surprise = 1;
 
+    /**
+     * @description This is the initial method for the class. The methods
+     * control the information that would be displayed initially to the users
+     * when they open the Emotion page
+     */
     public void init() {
         CapturePageController controller = (CapturePageController) Context.controllers.get(CapturePageController.class.getSimpleName());
         String chosenOne = String.valueOf(controller.namesCombo.getValue());
-        // 根据comboBox的名字来进行设定
+        // set name according to combox choice
         name.setText(chosenOne);
-        // croppedFace也是根据opencv和comboBox返回的值来进行确定。
+        // set cropped face from opencv capture
         this.results = controller.getResults();
         try {
             for (RecognizedFace face : results) {
@@ -56,14 +102,11 @@ public class EmotionPageController {
             e.printStackTrace();
         }
 
-
-        // 把可能性分级，very unlikely = 1, ...... very likeyly = 5
-        // 根据google emotion analysis返回的值进行调整，默认为1
+        // set emotion likelihood
         setJoy(faceEmotion.getJoyLikelihood());
         setSorrow(faceEmotion.getAngerLikelihood());
         setAnger(faceEmotion.getAngerLikelihood());
         setSurprise(faceEmotion.getSurpriseLikelihood());
-
 
         NumberAxis YAxis = new NumberAxis(0, 5, 1);
         CategoryAxis XAxis = new CategoryAxis();
@@ -72,7 +115,6 @@ public class EmotionPageController {
 
         YAxis.setLabel("Value");
         XAxis.setLabel("Emotion");
-
 
         emotionChart.setLayoutX(215);
         emotionChart.setLayoutY(117);
@@ -101,11 +143,18 @@ public class EmotionPageController {
         root.getChildren().add(emotionChart);
     }
 
+    /**
+     * @description This method is to control the page to exit
+     */
     public void goExit() {
         Stage stage = (Stage) exit.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * @param joy joy likelihood
+     * @description This method is to set joy likelihood
+     */
     public void setJoy(String joy) {
         if (joy.equals("VERY_UNLIKELY")) {
             this.joy = 1;
@@ -120,6 +169,10 @@ public class EmotionPageController {
         }
     }
 
+    /**
+     * @param sorrow sorrow likelihood
+     * @description This method is to set sorrow likelihood
+     */
     public void setSorrow(String sorrow) {
         if (sorrow.equals("VERY_UNLIKELY")) {
             this.sorrow = 1;
@@ -134,6 +187,10 @@ public class EmotionPageController {
         }
     }
 
+    /**
+     * @param anger anger likelihood
+     * @description This method is to set joy likelihood
+     */
     public void setAnger(String anger) {
         if (anger.equals("VERY_UNLIKELY")) {
             this.anger = 1;
@@ -148,6 +205,10 @@ public class EmotionPageController {
         }
     }
 
+    /**
+     * @param surprise surprise likelihood
+     * @description This method is to set surprise likelihood
+     */
     public void setSurprise(String surprise) {
         if (surprise.equals("VERY_UNLIKELY")) {
             this.surprise = 1;
